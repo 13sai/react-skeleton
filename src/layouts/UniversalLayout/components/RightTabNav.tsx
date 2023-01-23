@@ -1,7 +1,8 @@
 import { memo, useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { useLocation, useNavigate, Location } from 'react-router-dom';
 import classnames from 'classnames';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown } from 'antd';
+import type { MenuProps } from 'antd';
 
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { globalState } from '@/store/global';
@@ -250,8 +251,46 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     }
   };
 
-  // 更多菜单操作
-  const onMenuClick = useCallback(
+  const items: MenuProps['items'] = [
+    {
+      key: 'closeleft',
+      label: (
+        <>
+          <IconSvg name='arrow-left2' />
+          关闭左侧
+        </>
+      ),
+    },
+    {
+      key: 'closeright',
+      label: (
+        <>
+          <IconSvg name='arrow-right2' />
+          关闭右侧
+        </>
+      ),
+    },
+    {
+      key: 'closeother',
+      label: (
+        <>
+          <IconSvg name='close' />
+          关闭其他
+        </>
+      ),
+    },
+    {
+      key: 'closeall',
+      label: (
+        <>
+          <IconSvg name='close2' />
+          关闭所有
+        </>
+      ),
+    },
+  ];
+
+  const onClick: MenuProps['onClick'] = useCallback(
     ({ key }: { key: string }) => {
       switch (key) {
         case 'closeleft':
@@ -350,50 +389,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
         </span>
       </div>
       <div className='down'>
-        <Dropdown
-          overlay={
-            <Menu
-              onClick={onMenuClick}
-              items={[
-                {
-                  key: 'closeleft',
-                  label: (
-                    <>
-                      <IconSvg name='arrow-left2' />
-                      关闭左侧
-                    </>
-                  ),
-                },
-                {
-                  key: 'closeright',
-                  label: (
-                    <>
-                      <IconSvg name='arrow-right2' />
-                      关闭右侧
-                    </>
-                  ),
-                },
-                {
-                  key: 'closeother',
-                  label: (
-                    <>
-                      <IconSvg name='close' />
-                      关闭其他
-                    </>
-                  ),
-                },
-                {
-                  key: 'closeall',
-                  label: (
-                    <>
-                      <IconSvg name='close2' />
-                      关闭所有
-                    </>
-                  ),
-                },
-              ]}
-            />
-          }>
+        <Dropdown menu={{ items, onClick}}>
           <span className='icon-box icon'>
             <IconSvg name='more' />
           </span>

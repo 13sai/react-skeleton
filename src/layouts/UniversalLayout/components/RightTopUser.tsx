@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, MenuProps } from 'antd';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState, initialState } from '@/store/user';
@@ -11,13 +11,25 @@ import { resetToken } from '@/utils/token';
 
 import IconSvg from '@/components/IconSvg';
 
+
 export default memo(() => {
   const t = useRecoilValue(useI18n(locales));
   const [user, setUser] = useRecoilState(userState);
 
+  const items: MenuProps['items'] = [
+    {
+      key: 'userinfo',
+      label: <>{t('universal-layout.topmenu.userinfo')}</>,
+    },
+    {
+      key: 'logout',
+      label: <>{t('universal-layout.topmenu.logout')}</>,
+    },
+  ];
+
   const navigate = useNavigate();
 
-  const onMenuClick = useCallback(
+  const onClick: MenuProps['onClick'] = useCallback(
     ({ key }: { key: string }) => {
       if (key === 'logout') {
         setUser({
@@ -33,22 +45,7 @@ export default memo(() => {
     [user, setUser]
   );
   return (
-    <Dropdown
-      overlay={
-        <Menu
-          onClick={onMenuClick}
-          items={[
-            {
-              key: 'userinfo',
-              label: <>{t('universal-layout.topmenu.userinfo')}</>,
-            },
-            {
-              key: 'logout',
-              label: <>{t('universal-layout.topmenu.logout')}</>,
-            },
-          ]}
-        />
-      }>
+    <Dropdown menu={{ items, onClick}}>
       <a
         className='universallayout-top-usermenu ant-dropdown-link'
         onClick={(e) => e.preventDefault()}>

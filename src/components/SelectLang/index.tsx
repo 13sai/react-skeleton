@@ -1,5 +1,7 @@
 import { memo, useCallback, useMemo } from 'react';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown } from 'antd';
+import type { MenuProps } from 'antd';
+
 import { useRecoilState } from 'recoil';
 import { i18nLocaleState } from '@/store/i18n';
 import { setLocale } from '@/utils/i18n';
@@ -16,7 +18,7 @@ export interface SelectLangProps {
 export default memo(({ className }: SelectLangProps) => {
   const [i18nLocale, setI18nLocale] = useRecoilState(i18nLocaleState);
 
-  const menuItems = useMemo<ItemType[]>(
+  const items: MenuProps['items'] = useMemo<ItemType[]>(
     () => [
       {
         key: 'zh-CN',
@@ -34,7 +36,7 @@ export default memo(({ className }: SelectLangProps) => {
     [i18nLocale],
   );
 
-  const onMenuClick = useCallback(
+  const onClick: MenuProps['onClick'] = useCallback(
     ({ key }: { key: string }) => {
       const lang = key as I18nKey;
       setI18nLocale(lang);
@@ -43,7 +45,7 @@ export default memo(({ className }: SelectLangProps) => {
     [i18nLocale, setI18nLocale],
   );
   return (
-    <Dropdown className={className} overlay={<Menu onClick={onMenuClick} items={menuItems} />}>
+    <Dropdown className={className} menu={{items, onClick}}>
       <span>
         <IconSvg name='language-outline' />
       </span>

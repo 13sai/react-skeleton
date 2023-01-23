@@ -17,7 +17,6 @@ export interface IRouteMeta {
   title?: string;
   hidden?: boolean;
   icon?: string;
-  // role auth
   roles?: string[];
   breadcrumb?: Breadcrumb[] | false;
   selectLeftMenu?: string;
