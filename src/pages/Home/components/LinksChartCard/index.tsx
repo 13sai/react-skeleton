@@ -17,16 +17,16 @@ const linksChartOption: EChartsOption = {
     left: '0',
     right: '0',
     top: '0',
-    bottom: '0',
+    bottom: '0'
   },
   xAxis: {
     show: false,
     data: [
       /* '2019-04', '2019-05', '2019-06','2019-07', '2019-08', '2019-09', '2019-10', '2019-11', '2019-12', '2020-01', '2020-02', '2020-03' */
-    ],
+    ]
   },
   yAxis: {
-    show: false,
+    show: false
   },
   series: [
     {
@@ -36,10 +36,10 @@ const linksChartOption: EChartsOption = {
         /* 5888, 3838, 15880, 12888, 18888, 16888,5888, 3838, 15880, 12888, 18888, 16888 */
       ],
       itemStyle: {
-        color: '#48D8BF',
-      },
-    },
-  ],
+        color: '#48D8BF'
+      }
+    }
+  ]
 };
 
 const WorksChartCard: React.FC = () => {
@@ -50,8 +50,8 @@ const WorksChartCard: React.FC = () => {
     num: 0,
     chart: {
       day: [],
-      num: [],
-    },
+      num: []
+    }
   });
 
   const total = useMemo(() => visitData.total, [visitData]);
@@ -67,23 +67,23 @@ const WorksChartCard: React.FC = () => {
       const vData = {
         total: data?.total || 0,
         num: data?.num || 0,
-        chart: data?.chart || {
+        chart: ((data?.chart) != null) || {
           day: [],
-          num: [],
-        },
+          num: []
+        }
       };
       setVisitData(vData);
 
       const option: EChartsOption = {
         xAxis: {
-          data: vData.chart.day,
+          data: vData.chart.day
         },
         series: [
           {
             name: '新增',
-            data: vData.chart.num,
-          },
-        ],
+            data: vData.chart.num
+          }
+        ]
       };
       chart.setOption(option);
     } catch (error: any) {

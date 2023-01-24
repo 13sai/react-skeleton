@@ -5,7 +5,7 @@ import {
   IPathKeyRouter,
   IRouterPathKeyRouter,
   Breadcrumb,
-  TabNavType,
+  TabNavType
 } from '../types/router';
 import { isExternal, equalObject } from './common';
 import { merge } from 'lodash/fp';
@@ -27,10 +27,10 @@ export const createUseRoutes = (
     routesItem.path = item.path.startsWith('/')
       ? item.path
       : parentPath.endsWith('/')
-      ? parentPath
-      : parentPath + '/' + item.path;
+        ? parentPath
+        : parentPath + '/' + item.path;
 
-    if (item.component) {
+    if (item.component != null) {
       routesItem.element = createElement(item.component);
     }
 
@@ -38,11 +38,11 @@ export const createUseRoutes = (
     if (item.redirect) {
       children.push({
         path: routesItem.path,
-        element: createElement(Navigate, { to: item.redirect }),
+        element: createElement(Navigate, { to: item.redirect })
       });
     }
 
-    if (item.children) {
+    if (item.children != null) {
       children.push(...createUseRoutes(item.children, routesItem.path));
     }
 
@@ -63,10 +63,10 @@ export const pathKeyCreateUseRoutes = (
   for (let i = 0; i < routes.length; i++) {
     const item = routes[i];
     items[item.path || ''] = {
-      ...item,
+      ...item
     };
 
-    if (item.children) {
+    if (item.children != null) {
       items = merge(items, pathKeyCreateUseRoutes(item.children));
     }
   }
@@ -85,7 +85,7 @@ export const formatRoutes = (
   for (let i = 0; i < routes.length; i++) {
     const item = routes[i];
     const newItem: IRouter = {
-      ...item,
+      ...item
     };
 
     let path = item.path || '';
@@ -93,14 +93,14 @@ export const formatRoutes = (
       path = item.path.startsWith('/')
         ? item.path
         : parentPath.endsWith('/')
-        ? parentPath
-        : parentPath + '/' + item.path;
+          ? parentPath
+          : parentPath + '/' + item.path;
     }
     newItem.path = path;
 
-    let meta = item.meta || {};
-    let parent =
-      meta.parentPath && meta.parentPath.length > 0
+    const meta = (item.meta != null) || {};
+    const parent =
+      (meta.parentPath != null) && meta.parentPath.length > 0
         ? meta.parentPath
         : parentPaths;
     meta.parentPath = parent;
@@ -108,8 +108,8 @@ export const formatRoutes = (
 
     let children: IRouter[] | undefined;
     let pkChildren: IPathKeyRouter | undefined;
-    if (item.children) {
-      let formatRoute = formatRoutes(item.children, path, [...parent, path]);
+    if (item.children != null) {
+      const formatRoute = formatRoutes(item.children, path, [...parent, path]);
 
       children = formatRoute.router;
       newItem.children = children;
@@ -119,14 +119,14 @@ export const formatRoutes = (
 
     items.push(newItem);
     newRoutes[path] = newItem;
-    if (pkChildren) {
+    if (pkChildren != null) {
       newRoutes = merge(newRoutes, pkChildren);
     }
   }
 
   return {
     router: items,
-    pathKeyRouter: newRoutes,
+    pathKeyRouter: newRoutes
   };
 };
 
@@ -159,7 +159,7 @@ export const getBreadcrumbRoutes = (
   if (!route.path) return [];
 
   if (!route.meta?.breadcrumb) {
-    const parantPath = route.meta?.parentPath || [];
+    const parantPath = ((route.meta?.parentPath) != null) || [];
     const pathRoutes = getPathsRoutes(parantPath, routes);
     const breadcrumb: Breadcrumb[] = [];
 
@@ -167,7 +167,7 @@ export const getBreadcrumbRoutes = (
       const ele = pathRoutes[i];
       breadcrumb.push({
         title: ele.meta?.title || '',
-        path: ele.path,
+        path: ele.path
       });
     }
 
@@ -177,7 +177,7 @@ export const getBreadcrumbRoutes = (
 
     breadcrumb.push({
       title: route.meta?.title || '',
-      path: route.path,
+      path: route.path
     });
 
     return breadcrumb;
@@ -200,14 +200,14 @@ export const equalTabNavRoute = (
 ): boolean => {
   let is = false;
   switch (type) {
-    case 'querypath': // path + query
-      is =
+  case 'querypath': // path + query
+    is =
         equalObject(qs.parse(location1.search), qs.parse(location2.search)) &&
         location1.pathname === location2.pathname;
-      break;
-    default: // path
-      is = location1.pathname === location2.pathname;
-      break;
+    break;
+  default: // path
+    is = location1.pathname === location2.pathname;
+    break;
   }
 
   return is;

@@ -50,8 +50,8 @@ export default memo(() => {
           rules={[
             {
               required: true,
-              message: t('page.user.register.form-item-username.required'),
-            },
+              message: t('page.user.register.form-item-username.required')
+            }
           ]}
         >
           <Input placeholder={t('page.user.register.form-item-username')} prefix={<IconSvg name='user' />} />
@@ -62,8 +62,8 @@ export default memo(() => {
           rules={[
             {
               required: true,
-              message: t('page.user.register.form-item-password.required'),
-            },
+              message: t('page.user.register.form-item-password.required')
+            }
           ]}
         >
           <Input.Password
@@ -79,16 +79,16 @@ export default memo(() => {
           rules={[
             {
               required: true,
-              message: t('page.user.register.form-item-password.required'),
+              message: t('page.user.register.form-item-password.required')
             },
             ({ getFieldValue }) => ({
-              validator(rule, value) {
+              async validator (rule, value) {
                 if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
+                  await Promise.resolve(); return;
                 }
-                return Promise.reject(t('page.user.register.form-item-confirmpassword.compare'));
-              },
-            }),
+                return await Promise.reject(t('page.user.register.form-item-confirmpassword.compare'));
+              }
+            })
           ]}
         >
           <Input.Password

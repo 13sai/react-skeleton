@@ -19,7 +19,7 @@ const initPagination = {
   total: 0,
   current: 1,
   pageSize: 5,
-  showSizeChanger: false,
+  showSizeChanger: false
 };
 
 const ArticleHitCard: React.FC = () => {
@@ -28,22 +28,22 @@ const ArticleHitCard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [list, setList] = useState<TableListItem[]>([]);
   const [pagination, setPagination] = useState<PaginationConfig>({
-    ...initPagination,
+    ...initPagination
   });
 
   const getList = async (current: number) => {
     setLoading(true);
     try {
-      const response: ResponseData<{ list: TableListItem[]; total: number }> = await articleHitQueryList({
+      const response: ResponseData<{ list: TableListItem[], total: number }> = await articleHitQueryList({
         per: pagination.pageSize,
-        page: current,
+        page: current
       });
       const { data } = response;
-      setList(data?.list || []);
+      setList(((data?.list) != null) || []);
       setPagination({
         ...initPagination,
         current,
-        total: data?.total || 0,
+        total: data?.total || 0
       });
     } catch (error: any) {
       console.log(error);
@@ -60,16 +60,16 @@ const ArticleHitCard: React.FC = () => {
       title: t('page.home.articlehitcard.card.table-column-number'),
       dataIndex: 'index',
       width: 80,
-      render: (_, record, index) => <>{(pagination.current - 1) * pagination.pageSize + index + 1}</>,
+      render: (_, record, index) => <>{(pagination.current - 1) * pagination.pageSize + index + 1}</>
     },
     {
       title: t('page.home.articlehitcard.card.table-column-title'),
-      dataIndex: 'title',
+      dataIndex: 'title'
     },
     {
       title: t('page.home.articlehitcard.card.table-column-hit'),
-      dataIndex: 'hit',
-    },
+      dataIndex: 'hit'
+    }
   ];
 
   return (

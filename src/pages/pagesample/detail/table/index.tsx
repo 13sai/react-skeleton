@@ -11,12 +11,12 @@ const progressColumns = [
   {
     title: '时间',
     dataIndex: 'time',
-    key: 'time',
+    key: 'time'
   },
   {
     title: '当前进度',
     dataIndex: 'rate',
-    key: 'rate',
+    key: 'rate'
   },
   {
     title: '状态',
@@ -27,19 +27,19 @@ const progressColumns = [
         return <Badge status='success' text='成功' />;
       }
       return <Badge status='processing' text='进行中' />;
-    },
+    }
   },
 
   {
     title: '操作员ID',
     dataIndex: 'operator',
-    key: 'operator',
+    key: 'operator'
   },
   {
     title: '耗时',
     dataIndex: 'cost',
-    key: 'cost',
-  },
+    key: 'cost'
+  }
 ];
 const initDetail: DetailDataType = {
   userInfo: {
@@ -47,22 +47,22 @@ const initDetail: DetailDataType = {
     tel: '',
     courier: '',
     address: '',
-    remark: '',
+    remark: ''
   },
   refundApplication: {
     ladingNo: '',
     saleNo: '',
     state: '',
-    childOrders: '',
+    childOrders: ''
   },
   returnGoods: [],
-  returnProgress: [],
+  returnProgress: []
 };
 
-function App() {
+function App () {
   const [loading, setLoading] = useState<boolean>();
   const [detail, setDetail] = useState<DetailDataType>({
-    ...initDetail,
+    ...initDetail
   });
 
   const userInfo = useMemo(
@@ -72,9 +72,9 @@ function App() {
         tel: '',
         courier: '',
         address: '',
-        remark: '',
+        remark: ''
       },
-    [detail],
+    [detail]
   );
   const refundApplication = useMemo(
     () =>
@@ -82,9 +82,9 @@ function App() {
         ladingNo: '',
         saleNo: '',
         state: '',
-        childOrders: '',
+        childOrders: ''
       },
-    [detail],
+    [detail]
   );
   const returnGoods = useMemo(() => detail.returnGoods || [], [detail]);
   const goodsData = useMemo(() => {
@@ -98,7 +98,7 @@ function App() {
       return returnGoods.concat({
         id: '总计',
         num,
-        amount,
+        amount
       });
     }
     return [];
@@ -107,11 +107,11 @@ function App() {
 
   const renderContent = (value: any, row: any, index: any) => {
     const obj: {
-      children: any;
-      props: { colSpan?: number };
+      children: any
+      props: { colSpan?: number }
     } = {
       children: value,
-      props: {},
+      props: {}
     };
     if (index === returnGoods.length) {
       obj.props.colSpan = 0;
@@ -130,29 +130,29 @@ function App() {
         return {
           children: <span style={{ fontWeight: 600 }}>总计</span>,
           props: {
-            colSpan: 4,
-          },
+            colSpan: 4
+          }
         };
-      },
+      }
     },
     {
       title: '商品名称',
       dataIndex: 'name',
       key: 'name',
-      render: renderContent,
+      render: renderContent
     },
     {
       title: '商品条码',
       dataIndex: 'barcode',
       key: 'barcode',
-      render: renderContent,
+      render: renderContent
     },
     {
       title: '单价',
       dataIndex: 'price',
       key: 'price',
       align: 'right' as 'left' | 'right' | 'center',
-      render: renderContent,
+      render: renderContent
     },
     {
       title: '数量（件）',
@@ -164,7 +164,7 @@ function App() {
           return text;
         }
         return <span style={{ fontWeight: 600 }}>{text}</span>;
-      },
+      }
     },
     {
       title: '金额',
@@ -176,8 +176,8 @@ function App() {
           return text;
         }
         return <span style={{ fontWeight: 600 }}>{text}</span>;
-      },
-    },
+      }
+    }
   ];
 
   const getData = async () => {
@@ -187,7 +187,7 @@ function App() {
       const { data } = response;
       setDetail({
         ...initDetail,
-        ...data,
+        ...data
       });
     } catch (error: any) {
       console.log(error);

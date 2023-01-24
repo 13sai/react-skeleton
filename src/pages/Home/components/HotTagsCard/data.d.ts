@@ -1,6 +1,6 @@
 export interface TableListItem {
-  id: number;
-  name: string;
-  hit: number;
-  pinyin?: string;
+  id: number
+  name: string
+  hit: number
+  pinyin?: string
 }

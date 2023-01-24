@@ -16,7 +16,7 @@ import layoutRotes from './routes';
 import '@/assets/css/index.less';
 
 export interface UserLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default memo(({ children }: UserLayoutProps) => {

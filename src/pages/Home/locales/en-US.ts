@@ -29,5 +29,5 @@ export default {
   'page.home.workshitcard.card-title': 'Works Traffic Ranking',
   'page.home.workshitcard.card.table-column-number': 'Serial number',
   'page.home.workshitcard.card.table-column-title': 'Title',
-  'page.home.workshitcard.card.table-column-hit': 'Hits',
+  'page.home.workshitcard.card.table-column-hit': 'Hits'
 };

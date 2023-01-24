@@ -29,5 +29,5 @@ export default {
   'page.home.workshitcard.card-title': '作品浏览量排行',
   'page.home.workshitcard.card.table-column-number': '序号',
   'page.home.workshitcard.card.table-column-title': '标题',
-  'page.home.workshitcard.card.table-column-hit': '浏览量',
+  'page.home.workshitcard.card.table-column-hit': '浏览量'
 };

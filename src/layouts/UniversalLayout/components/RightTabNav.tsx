@@ -18,8 +18,8 @@ import IconSvg from '@/components/IconSvg';
 import { IRouter, IPathKeyRouter, TabNavItem } from '@/types/router';
 
 export interface RightTabNavProps {
-  jsonMenuData: IPathKeyRouter;
-  routeItem: IRouter;
+  jsonMenuData: IPathKeyRouter
+  routeItem: IRouter
 }
 
 export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
@@ -37,10 +37,10 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
   const scrollContentRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (offset: number): void => {
-    const boxWidth = scrollBoxRef.current
+    const boxWidth = (scrollBoxRef.current != null)
       ? scrollBoxRef.current.offsetWidth
       : 0;
-    const contentWidth = scrollContentRef.current
+    const contentWidth = (scrollContentRef.current != null)
       ? scrollContentRef.current.offsetWidth
       : 0;
     if (offset > 0) {
@@ -56,7 +56,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
 
   const tabNavPadding = 30;
   const moveToView = (index: number): void => {
-    if (!scrollContentRef.current || !scrollContentRef.current.childNodes) {
+    if ((scrollContentRef.current == null) || !scrollContentRef.current.childNodes) {
       return;
     }
 
@@ -70,7 +70,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     const tabItemElOffsetLeft = tabItemEl.offsetLeft;
     const tabItemOffsetWidth = tabItemEl.offsetWidth;
 
-    const boxWidth = scrollBoxRef.current
+    const boxWidth = (scrollBoxRef.current != null)
       ? scrollBoxRef.current.offsetWidth
       : 0;
     const contentWidth = scrollContentRef.current
@@ -120,7 +120,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
         const navList = val(preVal);
         return {
           ...preVal,
-          headTabNavList: [...navList],
+          headTabNavList: [...navList]
         };
       });
     },
@@ -133,7 +133,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     if (
       !routeItem ||
       location.pathname !== routeItem.path ||
-      (routeItem.children && routeItem.children?.length > 0)
+      ((routeItem.children != null) && routeItem.children?.length > 0)
     ) {
       return;
     }
@@ -150,9 +150,9 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
           {
             location,
             menu: {
-              ...routeItem,
-            },
-          },
+              ...routeItem
+            }
+          }
         ];
       }
       return val.headTabNavList;
@@ -165,7 +165,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     // 有关闭回调的无法关闭
     const navList: TabNavItem[] = tabNavList.filter(
       (item: TabNavItem) =>
-        (item.menu.meta?.tabNavCloseBefore &&
+        (((item.menu.meta?.tabNavCloseBefore) != null) &&
           typeof item.menu.meta.tabNavCloseBefore === 'function') ||
         item.menu.path === settings.tabNavHomePath
     );
@@ -180,7 +180,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     // 有关闭回调的和当前打开的和首页无法关闭
     const navList: TabNavItem[] = tabNavList.filter(
       (item: TabNavItem) =>
-        (item.menu.meta?.tabNavCloseBefore &&
+        (((item.menu.meta?.tabNavCloseBefore) != null) &&
           typeof item.menu.meta.tabNavCloseBefore === 'function') ||
         item.menu.path === settings.tabNavHomePath ||
         equalTabNavRoute(location, item.location, item.menu.meta?.tabNavType)
@@ -198,7 +198,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     // 有关闭回调的和当前打开的和首页和左侧或右侧无法关闭
     const navList: TabNavItem[] = tabNavList.filter(
       (item: TabNavItem, i: number) =>
-        (item.menu.meta?.tabNavCloseBefore &&
+        (((item.menu.meta?.tabNavCloseBefore) != null) &&
           typeof item.menu.meta.tabNavCloseBefore === 'function') ||
         item.menu.path === settings.tabNavHomePath ||
         (param === 'left' ? i >= index : i <= index)
@@ -240,7 +240,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
   // 关闭当前tabNav
   const closeCurrentTabNav = (item: TabNavItem, index: number): void => {
     if (
-      item.menu.meta?.tabNavCloseBefore &&
+      ((item.menu.meta?.tabNavCloseBefore) != null) &&
       typeof item.menu.meta.tabNavCloseBefore === 'function'
     ) {
       item.menu.meta.tabNavCloseBefore(() => {
@@ -259,7 +259,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
           <IconSvg name='arrow-left2' />
           关闭左侧
         </>
-      ),
+      )
     },
     {
       key: 'closeright',
@@ -268,7 +268,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
           <IconSvg name='arrow-right2' />
           关闭右侧
         </>
-      ),
+      )
     },
     {
       key: 'closeother',
@@ -277,7 +277,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
           <IconSvg name='close' />
           关闭其他
         </>
-      ),
+      )
     },
     {
       key: 'closeall',
@@ -286,27 +286,27 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
           <IconSvg name='close2' />
           关闭所有
         </>
-      ),
-    },
+      )
+    }
   ];
 
   const onClick: MenuProps['onClick'] = useCallback(
     ({ key }: { key: string }) => {
       switch (key) {
-        case 'closeleft':
-          closeTabNavLeftRight('left');
-          break;
-        case 'closeright':
-          closeTabNavLeftRight('right');
-          break;
-        case 'closeother':
-          closeTabNavOther();
-          break;
-        case 'closeall':
-          closeTabNavAll();
-          break;
-        default:
-          break;
+      case 'closeleft':
+        closeTabNavLeftRight('left');
+        break;
+      case 'closeright':
+        closeTabNavLeftRight('right');
+        break;
+      case 'closeother':
+        closeTabNavOther();
+        break;
+      case 'closeall':
+        closeTabNavAll();
+        break;
+      default:
+        break;
       }
     },
     [global]
@@ -325,7 +325,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
         hash: '',
         search: '',
         state: null,
-        key: '',
+        key: ''
       },
       homeRouter
     );
@@ -339,7 +339,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     <div className='universallayout-top-tab-nav'>
       <div
         className='left'
-        onClick={() => handleScroll(200)}>
+        onClick={() => { handleScroll(200); }}>
         <span className='icon'>
           <IconSvg name='arrow-left' />
         </span>
@@ -360,9 +360,9 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
                   location,
                   item.location,
                   item.menu?.meta?.tabNavType
-                ),
+                )
               })}
-              onClick={() => navigate(item.location)}>
+              onClick={() => { navigate(item.location); }}>
               <span className='icon-pre'>
                 <IconSvg name='refresh' />
               </span>
@@ -383,13 +383,13 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
       </div>
       <div
         className='right'
-        onClick={() => handleScroll(-200)}>
+        onClick={() => { handleScroll(-200); }}>
         <span className='icon'>
           <IconSvg name='arrow-right' />
         </span>
       </div>
       <div className='down'>
-        <Dropdown menu={{ items, onClick}}>
+        <Dropdown menu={{ items, onClick }}>
           <span className='icon-box icon'>
             <IconSvg name='more' />
           </span>

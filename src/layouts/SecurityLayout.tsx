@@ -1,16 +1,16 @@
-import { memo, useCallback, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { message } from "antd";
-import { useRecoilState } from "recoil";
-import { userState, CurrentUser } from "@/store/user";
+import { memo, useCallback, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
+import { useRecoilState } from 'recoil';
+import { userState, CurrentUser } from '@/store/user';
 
-import PageLoading from "@/components/PageLoading";
+import PageLoading from '@/components/PageLoading';
 
-import { ResponseData } from "@/utils/request";
-import { queryCurrent } from "@/services/user";
+import { ResponseData } from '@/utils/request';
+import { queryCurrent } from '@/services/user';
 
 export interface SecurityLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default memo(({ children }: SecurityLayoutProps) => {
@@ -25,15 +25,15 @@ export default memo(({ children }: SecurityLayoutProps) => {
       const { data } = response;
       setUser({
         ...user,
-        ...data,
+        ...data
       });
     } catch (error: any) {
-      console.log("error", error);
-      if (error.message && error.message === "CustomError") {
-        const response = error.response || { data: { code: 10002, msg: "" } };
+      console.log('error', error);
+      if (error.message && error.message === 'CustomError') {
+        const response = error.response || { data: { code: 10002, msg: '' } };
         const { code, msg } = response.data;
         if (code === 10002) {
-          navigate("/user/login", { replace: true });
+          navigate('/user/login', { replace: true });
         } else {
           message.error(msg || error);
         }

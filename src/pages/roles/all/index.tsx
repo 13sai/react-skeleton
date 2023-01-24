@@ -1,7 +1,7 @@
 import { Card, Alert, Descriptions, Button, Divider } from 'antd';
 import Permission from '@/components/Permission';
 
-function App() {
+function App () {
   return (
     <div className='layout-main-conent'>
       <Card>

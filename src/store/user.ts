@@ -3,22 +3,22 @@ import { queryMessage } from '@/services/user';
 import { ResponseData } from '@/utils/request';
 
 export interface CurrentUser {
-  id: number;
-  name: string;
-  avatar: string;
-  roles: string[];
+  id: number
+  name: string
+  avatar: string
+  roles: string[]
 }
 
 export const initialState: CurrentUser = {
   id: 0,
   name: '',
   avatar: '',
-  roles: [],
+  roles: []
 };
 
 export const userState = atom({
   key: 'userState',
-  default: initialState,
+  default: initialState
 });
 
 export const userMessageState = selector({
@@ -30,5 +30,5 @@ export const userMessageState = selector({
       throw response.message;
     }
     return data || 0;
-  },
+  }
 });

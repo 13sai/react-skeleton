@@ -10,7 +10,7 @@ const settings: Setting = {
   leftSidebar: true,
   tabNavEnable: true,
   tabNavHomePath: '/home/workspace',
-  navMode: 'inline',
+  navMode: 'inline'
 };
 
 export default settings;

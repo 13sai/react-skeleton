@@ -19,15 +19,15 @@ const Forbidden = (
 );
 
 export interface ALinkProps {
-  children: React.ReactNode;
-  role?: string | string[];
-  noNode?: React.ReactNode;
+  children: React.ReactNode
+  role?: string | string[]
+  noNode?: React.ReactNode
 }
 
 const Permission: React.FC<ALinkProps> = ({
   role,
   noNode = Forbidden,
-  children,
+  children
 }) => {
   const user = useRecoilValue(userState);
   return permission(user.roles, role) ? <>{children}</> : <>{noNode}</>;

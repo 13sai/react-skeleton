@@ -17,16 +17,16 @@ const topicsChartOption: EChartsOption = {
     left: '0',
     right: '0',
     top: '0',
-    bottom: '0',
+    bottom: '0'
   },
   xAxis: {
     show: false,
     data: [
       /* '03-01','03-02','03-03','03-04','03-05','03-06','03-07','03-08','03-09','03-10','03-11','03-12','03-13','03-15','03-15','03-16','03-17','03-18','03-19','03-20','03-21','03-22','03-23','03-24','03-25','03-26','03-27','03-28','03-29','03-30' */
-    ],
+    ]
   },
   yAxis: {
-    show: false,
+    show: false
   },
   series: [
     {
@@ -42,27 +42,27 @@ const topicsChartOption: EChartsOption = {
           colorStops: [
             {
               offset: 0,
-              color: '#A9F387', // 0% 处的颜色
+              color: '#A9F387' // 0% 处的颜色
             },
             {
               offset: 1,
-              color: '#48D8BF', // 100% 处的颜色
-            },
+              color: '#48D8BF' // 100% 处的颜色
+            }
           ],
-          globalCoord: false, // 缺省为 false
+          globalCoord: false // 缺省为 false
         } as any,
         shadowColor: 'rgba(72,216,191, 0.3)',
         shadowBlur: 10,
-        shadowOffsetY: 20,
+        shadowOffsetY: 20
       },
       itemStyle: {
         borderWidth: 6,
         borderColor: '#A9F387',
-        color: '#48D8BF',
+        color: '#48D8BF'
       },
-      smooth: true,
-    },
-  ],
+      smooth: true
+    }
+  ]
 };
 
 const WorksChartCard: React.FC = () => {
@@ -73,8 +73,8 @@ const WorksChartCard: React.FC = () => {
     num: 0,
     chart: {
       day: [],
-      num: [],
-    },
+      num: []
+    }
   });
 
   const total = useMemo(() => visitData.total, [visitData]);
@@ -90,23 +90,23 @@ const WorksChartCard: React.FC = () => {
       const vData = {
         total: data?.total || 0,
         num: data?.num || 0,
-        chart: data?.chart || {
+        chart: ((data?.chart) != null) || {
           day: [],
-          num: [],
-        },
+          num: []
+        }
       };
       setVisitData(vData);
 
       const option: EChartsOption = {
         xAxis: {
-          data: vData.chart.day,
+          data: vData.chart.day
         },
         series: [
           {
             name: '新增',
-            data: vData.chart.num,
-          },
-        ],
+            data: vData.chart.num
+          }
+        ]
       };
       chart.setOption(option);
     } catch (error: any) {

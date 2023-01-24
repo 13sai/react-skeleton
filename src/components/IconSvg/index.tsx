@@ -1,12 +1,12 @@
 import style from './index.module.less';
 
 export interface IIconSvgProps {
-  name: string;
-  prefix?: string;
-  [x: string]: any;
+  name: string
+  prefix?: string
+  [x: string]: any
 }
 
-export default function IconSvg({ name, prefix = 'icon', ...props }: IIconSvgProps) {
+export default function IconSvg ({ name, prefix = 'icon', ...props }: IIconSvgProps) {
   const symbolId = `#${prefix}-${name}`;
 
   return (

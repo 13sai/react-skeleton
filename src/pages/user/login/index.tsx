@@ -52,8 +52,8 @@ export default memo(() => {
           rules={[
             {
               required: true,
-              message: t('page.user.login.form-item-username.required'),
-            },
+              message: t('page.user.login.form-item-username.required')
+            }
           ]}
         >
           <Input placeholder={t('page.user.login.form-item-username')} prefix={<IconSvg name='user' />} />
@@ -64,8 +64,8 @@ export default memo(() => {
           rules={[
             {
               required: true,
-              message: t('page.user.login.form-item-password.required'),
-            },
+              message: t('page.user.login.form-item-password.required')
+            }
           ]}
         >
           <Input.Password

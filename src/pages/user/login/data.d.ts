@@ -1,8 +1,8 @@
 export interface LoginParamsType {
-  username: string;
-  password: string;
+  username: string
+  password: string
 }
 
 export interface LoginResponseData {
-  token: string;
+  token: string
 }

@@ -24,7 +24,7 @@ export const setHtmlLang = (lang: I18nKey) => {
    * axios.defaults.headers.common['Accept-Language'] = locale
    */
   const htmlSelector = document.querySelector('html');
-  if (htmlSelector) {
+  if (htmlSelector != null) {
     htmlSelector.setAttribute('lang', lang);
   }
 };

@@ -7,7 +7,7 @@ import { PaginationConfig, TableListItem, IResponseData } from './data.d';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
 
-function App() {
+function App () {
   // 获取数据
   const [loading, setLoading] = useState<boolean>(false);
   const [list, setList] = useState<TableListItem[]>([]);
@@ -16,21 +16,21 @@ function App() {
     current: 1,
     pageSize: 10,
     showSizeChanger: true,
-    showQuickJumper: true,
+    showQuickJumper: true
   });
   const getList = async (current: number): Promise<void> => {
     setLoading(true);
 
     const response: ResponseData<IResponseData> = await queryList({
       page: current,
-      per: 10,
+      per: 10
     });
-    const data = response.data || { list: [], total: 0 };
+    const data = (response.data != null) || { list: [], total: 0 };
     setList(data.list || []);
     setPagination({
       ...pagination,
       current,
-      total: data.total || 0,
+      total: data.total || 0
     });
 
     setLoading(false);
@@ -55,7 +55,7 @@ function App() {
         getList(pagination.current);
 
         setDeleteLoading([]);
-      },
+      }
     });
   };
 
@@ -70,7 +70,7 @@ function App() {
     const response: ResponseData<TableListItem> = await detailData(id);
     const { data } = response;
     setUpdateData({
-      ...data,
+      ...data
     });
     setUpdateFormVisible(true);
 
@@ -125,7 +125,7 @@ function App() {
           </div>
         }
       >
-        <Button type='dashed' style={{ width: '100%', marginBottom: 8 }} onClick={() => setCreateFormVisible(true)}>
+        <Button type='dashed' style={{ width: '100%', marginBottom: 8 }} onClick={() => { setCreateFormVisible(true); }}>
           新增
         </Button>
 
@@ -137,7 +137,7 @@ function App() {
             ...pagination,
             onChange: (page: number) => {
               getList(page);
-            },
+            }
           }}
           dataSource={list}
           renderItem={(item) => (
@@ -147,15 +147,15 @@ function App() {
                 <Button
                   type='link'
                   loading={detailUpdateLoading.includes(item.id)}
-                  onClick={() => detailUpdateData(item.id)}
+                  onClick={async () => { await detailUpdateData(item.id); }}
                 >
                   编辑
                 </Button>,
 
                 // eslint-disable-next-line react/jsx-key
-                <Button type='link' loading={deleteLoading.includes(item.id)} onClick={() => deleteTableData(item.id)}>
+                <Button type='link' loading={deleteLoading.includes(item.id)} onClick={() => { deleteTableData(item.id); }}>
                   删除
-                </Button>,
+                </Button>
               ]}
             >
               <List.Item.Meta
@@ -173,21 +173,23 @@ function App() {
       </Card>
 
       <CreateForm
-        onCancel={() => setCreateFormVisible(false)}
+        onCancel={() => { setCreateFormVisible(false); }}
         visible={createFormVisible}
         onSubmit={createSubmit}
         onSubmitLoading={createSubmitLoading}
       />
 
-      {updateFormVisible && Object.keys(updateData).length > 0 ? (
-        <UpdateForm
-          values={updateData}
-          onCancel={() => updataFormCancel()}
-          visible={updateFormVisible}
-          onSubmit={updateSubmit}
-          onSubmitLoading={updateSubmitLoading}
-        />
-      ) : null}
+      {updateFormVisible && Object.keys(updateData).length > 0
+        ? (
+          <UpdateForm
+            values={updateData}
+            onCancel={async () => { await updataFormCancel(); }}
+            visible={updateFormVisible}
+            onSubmit={updateSubmit}
+            onSubmitLoading={updateSubmitLoading}
+          />
+        )
+        : null}
     </div>
   );
 }

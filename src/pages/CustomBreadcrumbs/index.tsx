@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { useI18n } from '@/store/i18n';
 import locales from './locales';
 
-function App() {
+function App () {
   const t = useRecoilValue(useI18n(locales));
   return (
     <div className='layout-main-conent'>

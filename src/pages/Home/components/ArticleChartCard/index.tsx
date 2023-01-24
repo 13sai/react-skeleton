@@ -20,7 +20,7 @@ const ArticleChartCard: React.FC = () => {
     total: 0,
     num: 0,
     week: 0,
-    day: 0,
+    day: 0
   });
 
   const getData = async () => {
@@ -32,7 +32,7 @@ const ArticleChartCard: React.FC = () => {
         total: data?.total || 0,
         num: data?.num || 0,
         week: data?.week || 0,
-        day: data?.day || 0,
+        day: data?.day || 0
       });
     } catch (error: any) {
       console.log(error);
@@ -56,27 +56,31 @@ const ArticleChartCard: React.FC = () => {
           <div className={styles.articleText}>
             <span>
               {t('page.home.text-daycompare')} {Math.abs(visitData.day)}%
-              {visitData.day > 0 ? (
-                <span className={styles.colored4014}>
-                  <IconSvg name='arrow-down' style={{ transform: 'rotate(180deg)' }} />
-                </span>
-              ) : (
-                <span className={styles.color19be6b}>
-                  <IconSvg name='arrow-down' />
-                </span>
-              )}
+              {visitData.day > 0
+                ? (
+                  <span className={styles.colored4014}>
+                    <IconSvg name='arrow-down' style={{ transform: 'rotate(180deg)' }} />
+                  </span>
+                )
+                : (
+                  <span className={styles.color19be6b}>
+                    <IconSvg name='arrow-down' />
+                  </span>
+                )}
             </span>
             <span className='margin-l10'>
               {t('page.home.text-weekcompare')} {Math.abs(visitData.week)}%
-              {visitData.week > 0 ? (
-                <span className={styles.colored4014}>
-                  <IconSvg name='arrow-down' style={{ transform: 'rotate(180deg)' }} />
-                </span>
-              ) : (
-                <span className={styles.color19be6b}>
-                  <IconSvg name='arrow-down' />
-                </span>
-              )}
+              {visitData.week > 0
+                ? (
+                  <span className={styles.colored4014}>
+                    <IconSvg name='arrow-down' style={{ transform: 'rotate(180deg)' }} />
+                  </span>
+                )
+                : (
+                  <span className={styles.color19be6b}>
+                    <IconSvg name='arrow-down' />
+                  </span>
+                )}
             </span>
           </div>
         </div>

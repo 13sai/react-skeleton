@@ -5,7 +5,7 @@ import { createData } from './service';
 import TableForm from './components/TableForm';
 import FooterToolbar from '@/components/FooterToolbar';
 
-function App() {
+function App () {
   const [form] = Form.useForm();
   const onReset = () => {
     form.resetFields();
@@ -42,8 +42,8 @@ function App() {
                 rules={[
                   {
                     required: true,
-                    message: '必填',
-                  },
+                    message: '必填'
+                  }
                 ]}
               >
                 <Input placeholder='请输入' />
@@ -56,8 +56,8 @@ function App() {
                 rules={[
                   {
                     required: true,
-                    message: '必填',
-                  },
+                    message: '必填'
+                  }
                 ]}
               >
                 <DatePicker.RangePicker style={{ width: '100%' }} placeholder={['开始日期', '截止日期']} />
@@ -70,8 +70,8 @@ function App() {
                 rules={[
                   {
                     required: true,
-                    message: '请选择',
-                  },
+                    message: '请选择'
+                  }
                 ]}
               >
                 <Select placeholder='请选择' allowClear>
