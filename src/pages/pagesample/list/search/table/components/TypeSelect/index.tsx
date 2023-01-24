@@ -2,9 +2,9 @@ import React from 'react';
 import { Select } from 'antd';
 
 interface TypeSelectProps {
-  value?: string
-  placeholder?: string
-  onChange?: (value: string) => void
+  value?: string;
+  placeholder?: string;
+  onChange?: (value: string) => void;
 }
 
 const TypeSelect: React.FC<TypeSelectProps> = (props) => {

@@ -6,8 +6,8 @@ import ALink from '@/components/ALink';
 import { Breadcrumb as CustomBreadcrumb } from '@/types/router';
 
 export interface BreadCrumbsProps {
-  list?: CustomBreadcrumb[]
-  className?: string
+  list?: CustomBreadcrumb[];
+  className?: string;
 }
 
 const BreadCrumbs: React.FC<BreadCrumbsProps> = ({ list = [], ...attr }) => (

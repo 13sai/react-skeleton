@@ -18,7 +18,7 @@ const initPagination = {
   total: 0,
   current: 1,
   pageSize: 5,
-  showSizeChanger: false
+  showSizeChanger: false,
 };
 
 const HotSearchCard: React.FC = () => {
@@ -27,22 +27,22 @@ const HotSearchCard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [list, setList] = useState<TableListItem[]>([]);
   const [pagination, setPagination] = useState<PaginationConfig>({
-    ...initPagination
+    ...initPagination,
   });
 
   const getList = async (current: number) => {
     setLoading(true);
     try {
-      const response: ResponseData<{ list: TableListItem[], total: number }> = await hotSearchQueryList({
+      const response: ResponseData<{ list: TableListItem[]; total: number }> = await hotSearchQueryList({
         per: pagination.pageSize,
-        page: current
+        page: current,
       });
       const { data } = response;
-      setList(((data?.list) != null) || []);
+      setList(data?.list || []);
       setPagination({
         ...initPagination,
         current,
-        total: data?.total || 0
+        total: data?.total || 0,
       });
     } catch (error: any) {
       console.log(error);
@@ -59,16 +59,16 @@ const HotSearchCard: React.FC = () => {
       title: t('page.home.hotsearchcard.card.table-column-number'),
       dataIndex: 'index',
       width: 80,
-      render: (_, record, index) => <>{(pagination.current - 1) * pagination.pageSize + index + 1}</>
+      render: (_, record, index) => <>{(pagination.current - 1) * pagination.pageSize + index + 1}</>,
     },
     {
       title: t('page.home.hotsearchcard.card.table-column-name'),
-      dataIndex: 'name'
+      dataIndex: 'name',
     },
     {
       title: t('page.home.hotsearchcard.card.table-column-hit'),
-      dataIndex: 'hit'
-    }
+      dataIndex: 'hit',
+    },
   ];
 
   return (

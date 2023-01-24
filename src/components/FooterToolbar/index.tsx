@@ -3,9 +3,9 @@ import classnames from 'classnames';
 import style from './index.module.less';
 
 export interface FooterToolbarProps {
-  children: React.ReactNode
-  style?: React.CSSProperties
-  className?: string
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 const FooterToolbar: React.FC<FooterToolbarProps> = (props) => {

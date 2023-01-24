@@ -41,7 +41,7 @@ const createMenuItems = (
 
     const icon = item.meta?.icon || undefined;
     const hidden = item.meta?.hidden || false;
-    if (hidden) {
+    if (hidden === true) {
       // eslint-disable-next-line no-continue
       continue;
     }
@@ -58,7 +58,7 @@ const createMenuItems = (
 
     const title = item.meta?.title || '--';
 
-    if (item.children != null) {
+    if (item.children) {
       items.push({
         key: path,
         label: (
@@ -71,7 +71,7 @@ const createMenuItems = (
             <span>{t(title)}</span>
           </>
         ),
-        children: createMenuItems(t, userRoles, item.children, path)
+        children: createMenuItems(t, userRoles, item.children, path),
       });
     } else {
       items.push({
@@ -85,7 +85,7 @@ const createMenuItems = (
             )}
             <span>{t(title)}</span>
           </ALink>
-        )
+        ),
       });
     }
   }
@@ -94,12 +94,12 @@ const createMenuItems = (
 };
 
 export interface SiderMenuProps {
-  menuData: IRouter[]
-  routeItem: IRouter
-  userRoles?: string[]
-  collapsed?: boolean
-  mode?: 'horizontal' | 'inline'
-  theme?: Theme
+  menuData: IRouter[];
+  routeItem: IRouter;
+  userRoles?: string[];
+  collapsed?: boolean;
+  mode?: 'horizontal' | 'inline';
+  theme?: Theme;
 }
 
 export default memo(
@@ -109,20 +109,20 @@ export default memo(
     userRoles = [],
     collapsed = false,
     mode = 'inline',
-    theme = 'dark'
+    theme = 'dark',
   }: SiderMenuProps) => {
     const t = useRecoilValue(useI18n(locales));
     const selectedKeys = useMemo(() => {
       if (!routeItem) {
         return [];
       }
-      if ((routeItem.meta != null) && routeItem.meta.selectLeftMenu) {
+      if (routeItem.meta && routeItem.meta.selectLeftMenu) {
         return [routeItem.meta.selectLeftMenu];
       }
       return [routeItem.path];
     }, [routeItem]);
     const parentPaths = useMemo(() => {
-      if (routeItem && (routeItem.meta != null) && (routeItem.meta.parentPath != null)) {
+      if (routeItem && routeItem.meta && routeItem.meta.parentPath) {
         return routeItem.meta.parentPath;
       }
       return [];
@@ -138,29 +138,27 @@ export default memo(
         setOpenKeys([]);
       }
     }, [collapsed, parentPaths]);
-    return mode === 'inline'
-      ? (
-        <Menu
-          className='universallayout-menu'
-          mode={mode}
-          theme={theme}
-          inlineCollapsed={collapsed}
-          selectedKeys={selectedKeys}
-          openKeys={openKeys}
-          onOpenChange={setOpenKeys}
-          items={createMenuItems(t, userRoles, menuData)}
-        />
-      )
-      : (
-        <Menu
-          className='universallayout-menu'
-          mode={mode}
-          theme={theme}
-          selectedKeys={selectedKeys}
-          openKeys={openKeys}
-          onOpenChange={setOpenKeys}
-          items={createMenuItems(t, userRoles, menuData)}
-        />
-      );
+    return mode === 'inline' ? (
+      <Menu
+        className='universallayout-menu'
+        mode={mode}
+        theme={theme}
+        inlineCollapsed={collapsed}
+        selectedKeys={selectedKeys}
+        openKeys={openKeys}
+        onOpenChange={setOpenKeys}
+        items={createMenuItems(t, userRoles, menuData)}
+      />
+    ) : (
+      <Menu
+        className='universallayout-menu'
+        mode={mode}
+        theme={theme}
+        selectedKeys={selectedKeys}
+        openKeys={openKeys}
+        onOpenChange={setOpenKeys}
+        items={createMenuItems(t, userRoles, menuData)}
+      />
+    );
   }
 );

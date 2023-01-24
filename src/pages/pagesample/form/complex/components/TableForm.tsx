@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Button, Divider, Input, Popconfirm, Table, message } from 'antd';
 
 export interface TableFormDataType {
-  key: string
-  name?: string
-  workId?: string
-  edit?: boolean
-  isNew?: boolean
+  key: string;
+  name?: string;
+  workId?: string;
+  edit?: boolean;
+  isNew?: boolean;
 }
 
 interface TableFormProps {
-  value?: TableFormDataType[]
-  onChange?: (value: TableFormDataType[]) => void
+  value?: TableFormDataType[];
+  onChange?: (value: TableFormDataType[]) => void;
 }
 
 const TableForm: React.FC<TableFormProps> = (props) => {
@@ -23,13 +23,13 @@ const TableForm: React.FC<TableFormProps> = (props) => {
   const [data, setData] = useState<TableFormDataType[] | undefined>(value);
 
   const getRowByKey = (key: string, newData?: TableFormDataType[]) =>
-    ((newData != null) || data)?.filter((item) => item.key === key)[0];
+    (newData || data)?.filter((item) => item.key === key)[0];
 
   const toggleEditable = (e: React.MouseEvent | React.KeyboardEvent, key: string) => {
     e.preventDefault();
     const newData = data?.map((item) => ({ ...item }));
     const target = getRowByKey(key, newData);
-    if (target != null) {
+    if (target) {
       // 进入编辑状态时保存原始数据
       if (!target.edit) {
         cacheOriginData[key] = { ...target };
@@ -41,14 +41,14 @@ const TableForm: React.FC<TableFormProps> = (props) => {
   };
 
   const newTableData = () => {
-    const newData = ((data?.map((item) => ({ ...item }))) != null) || [];
+    const newData = data?.map((item) => ({ ...item })) || [];
 
     newData.push({
       key: `NEW_TEMP_ID_${index}`,
       workId: '',
       name: '',
       edit: true,
-      isNew: true
+      isNew: true,
     });
 
     setIndex(index + 1);
@@ -58,7 +58,7 @@ const TableForm: React.FC<TableFormProps> = (props) => {
   const remove = (key: string) => {
     const newData = data?.filter((item) => item.key !== key) as TableFormDataType[];
     setData(newData);
-    if (onChange != null) {
+    if (onChange) {
       onChange(newData);
     }
   };
@@ -67,7 +67,7 @@ const TableForm: React.FC<TableFormProps> = (props) => {
     e.persist();
     setLoading(true);
 
-    const target = (getRowByKey(key) != null) || ({} as any);
+    const target = getRowByKey(key) || ({} as any);
     if (!target.workId || !target.name) {
       message.error('请填写完整信息。');
       (e.target as HTMLInputElement).focus();
@@ -76,7 +76,7 @@ const TableForm: React.FC<TableFormProps> = (props) => {
     }
     delete target.isNew;
     toggleEditable(e, key);
-    if (onChange != null) {
+    if (onChange) {
       onChange(data as TableFormDataType[]);
     }
     setLoading(false);
@@ -94,7 +94,7 @@ const TableForm: React.FC<TableFormProps> = (props) => {
           const originItem = {
             ...item,
             ...cacheOriginData[key],
-            edit: false
+            edit: false,
           };
           delete cacheOriginData[key];
           setCacheOriginData(cacheOriginData);
@@ -109,7 +109,7 @@ const TableForm: React.FC<TableFormProps> = (props) => {
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: string, key: string) => {
     const newData = [...(data as TableFormDataType[])];
-    const target = (getRowByKey(key, newData) != null) || ({} as any);
+    const target = getRowByKey(key, newData) || ({} as any);
     if (target) {
       target[fieldName] = e.target.value;
       setData(newData);
@@ -134,14 +134,14 @@ const TableForm: React.FC<TableFormProps> = (props) => {
             <Input
               value={text}
               autoFocus
-              onChange={(e) => { handleFieldChange(e, 'name', record.key); }}
-              onKeyPress={(e) => { handleKeyPress(e, record.key); }}
+              onChange={(e) => handleFieldChange(e, 'name', record.key)}
+              onKeyPress={(e) => handleKeyPress(e, record.key)}
               placeholder='姓名'
             />
           );
         }
         return text;
-      }
+      },
     },
     {
       title: '工号',
@@ -153,14 +153,14 @@ const TableForm: React.FC<TableFormProps> = (props) => {
           return (
             <Input
               value={text}
-              onChange={(e) => { handleFieldChange(e, 'workId', record.key); }}
-              onKeyPress={(e) => { handleKeyPress(e, record.key); }}
+              onChange={(e) => handleFieldChange(e, 'workId', record.key)}
+              onKeyPress={(e) => handleKeyPress(e, record.key)}
               placeholder='工号'
             />
           );
         }
         return text;
-      }
+      },
     },
     {
       title: '操作',
@@ -173,9 +173,9 @@ const TableForm: React.FC<TableFormProps> = (props) => {
           if (record.isNew) {
             return (
               <span>
-                <a onClick={(e) => { saveRow(e, record.key); }}>添加</a>
+                <a onClick={(e) => saveRow(e, record.key)}>添加</a>
                 <Divider type='vertical' />
-                <Popconfirm title='是否要删除此行？' onConfirm={() => { remove(record.key); }}>
+                <Popconfirm title='是否要删除此行？' onConfirm={() => remove(record.key)}>
                   <a>删除</a>
                 </Popconfirm>
               </span>
@@ -183,23 +183,23 @@ const TableForm: React.FC<TableFormProps> = (props) => {
           }
           return (
             <span>
-              <a onClick={(e) => { saveRow(e, record.key); }}>保存</a>
+              <a onClick={(e) => saveRow(e, record.key)}>保存</a>
               <Divider type='vertical' />
-              <a onClick={(e) => { cancel(e, record.key); }}>取消</a>
+              <a onClick={(e) => cancel(e, record.key)}>取消</a>
             </span>
           );
         }
         return (
           <span>
-            <a onClick={(e) => { toggleEditable(e, record.key); }}>编辑</a>
+            <a onClick={(e) => toggleEditable(e, record.key)}>编辑</a>
             <Divider type='vertical' />
-            <Popconfirm title='是否要删除此行？' onConfirm={() => { remove(record.key); }}>
+            <Popconfirm title='是否要删除此行？' onConfirm={() => remove(record.key)}>
               <a>删除</a>
             </Popconfirm>
           </span>
         );
-      }
-    }
+      },
+    },
   ];
 
   return (

@@ -5,7 +5,7 @@ import { ParsedQuery } from 'query-string';
  * @param obj2
  * @returns
  */
-export function equalObjectKey (obj1: Object, obj2: Object): boolean {
+export function equalObjectKey(obj1: Object, obj2: Object): boolean {
   const obj1Keys: string[] = Object.keys(obj1);
   const obj2Keys: string[] = Object.keys(obj2);
   const obj1KeysLen: number = obj1Keys.length;
@@ -29,7 +29,7 @@ export function equalObjectKey (obj1: Object, obj2: Object): boolean {
  * @param obj2 ParsedQuery
  * @returns
  */
-export function equalObject (obj1: ParsedQuery, obj2: ParsedQuery): boolean {
+export function equalObject(obj1: ParsedQuery, obj2: ParsedQuery): boolean {
   const obj1Keys: string[] = Object.keys(obj1);
   const obj2Keys: string[] = Object.keys(obj2);
   const obj1KeysLen: number = obj1Keys.length;

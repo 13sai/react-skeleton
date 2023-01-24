@@ -9,7 +9,7 @@ import enUS from './en-US';
 
 const locales: I18n = {
   'zh-CN': zhCN,
-  'en-US': enUS
+  'en-US': enUS,
 };
 
 export default locales;

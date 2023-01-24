@@ -4,16 +4,16 @@ import settings from '@/config/settings';
 import { getToken } from '@/utils/token';
 
 export interface ResponseData<T = unknown> {
-  code: number
-  data?: T
-  message?: string
+  code: number;
+  data?: T;
+  message?: string;
 }
 
-const customCodeMessage: Record<number, string> = {
-  10002: '登入信息已失效，请重新登入再操作'
+const customCodeMessage: { [key: number]: string } = {
+  10002: '登入信息已失效，请重新登入再操作',
 };
 
-const serverCodeMessage: Record<number, string> = {
+const serverCodeMessage: { [key: number]: string } = {
   200: '服务器成功返回请求的数据',
   400: 'Bad Request',
   401: 'Unauthorized',
@@ -22,13 +22,13 @@ const serverCodeMessage: Record<number, string> = {
   500: '服务器发生错误，请检查服务器(Internal Server Error)',
   502: '网关错误(Bad Gateway)',
   503: '服务不可用，服务器暂时过载或维护(Service Unavailable)',
-  504: '网关超时(Gateway Timeout)'
+  504: '网关超时(Gateway Timeout)',
 };
 
 /**
  * 异常处理程序
  */
-const errorHandler = async (error: any) => {
+const errorHandler = (error: any) => {
   const { response, message } = error;
   if (message === 'CustomError') {
     const { config, data } = response;
@@ -39,7 +39,7 @@ const errorHandler = async (error: any) => {
     if (!noVerifyBool) {
       notification.error({
         message: '提示',
-        description: customCodeMessage[code] || msg || 'Error'
+        description: customCodeMessage[code] || msg || 'Error',
       });
 
       if (code === 10002) {
@@ -57,16 +57,16 @@ const errorHandler = async (error: any) => {
     const { status, request } = response;
     notification.error({
       message: `请求错误 ${status}: ${request.responseURL}`,
-      description: errorText
+      description: errorText,
     });
   } else if (!response) {
     notification.error({
       description: '网络异常，无法连接服务器',
-      message: '网络异常'
+      message: '网络异常',
     });
   }
 
-  return await Promise.reject(error);
+  return Promise.reject(error);
 };
 
 /**
@@ -75,7 +75,7 @@ const errorHandler = async (error: any) => {
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_APIHOST || '', // url = api url + request url
   withCredentials: false, // 当跨域请求时发送cookie
-  timeout: 5000 // 请求超时时间,5000(单位毫秒), 0 不做限制
+  timeout: 5000, // 请求超时时间,5000(单位毫秒), 0 不做限制
 });
 
 /**
@@ -86,7 +86,7 @@ request.interceptors.request.use(
   (config: AxiosRequestConfig & { cType?: boolean }) => {
     // 如果设置了cType 说明是自定义 添加 Content-Type类型 为自定义post 做铺垫
     if (config.cType) {
-      if (config.headers == null) {
+      if (!config.headers) {
         config.headers = {};
       }
       config.headers.setContentType = 'application/json;charset=UTF-8';
@@ -95,7 +95,7 @@ request.interceptors.request.use(
     // 自定义添加token header
     const token = getToken();
     if (token) {
-      if (config.headers == null) {
+      if (!config.headers) {
         config.headers = {};
       }
       config.headers.set(settings.tokenKey, token);
@@ -117,17 +117,17 @@ request.interceptors.response.use((response: AxiosResponse<ResponseData>) => {
   if (code !== 0) {
     return Promise.reject({
       response,
-      message: 'CustomError'
+      message: 'CustomError',
     });
   }
 
   return response;
 });
 
-export default async function ajax<T = any, R = AxiosResponse<T>> (
+export default function ajax<T = any, R = AxiosResponse<T>>(
   config: AxiosRequestConfig & { cType?: boolean }
 ): AxiosPromise<R> {
-  return await request(config)
+  return request(config)
     .then((response: AxiosResponse) => response.data)
-    .catch(async (error) => await errorHandler(error));
+    .catch((error) => errorHandler(error));
 }

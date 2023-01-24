@@ -7,11 +7,11 @@ import TypeSelect from './TypeSelect';
 import { TableListItem } from '../data.d';
 
 interface CreateFormProps {
-  visible: boolean
-  values?: Partial<TableListItem>
-  onSubmitLoading: boolean
-  onSubmit: (values: Omit<TableListItem, 'id'>, form: FormInstance) => void
-  onCancel: () => void
+  visible: boolean;
+  values?: Partial<TableListItem>;
+  onSubmitLoading: boolean;
+  onSubmit: (values: Omit<TableListItem, 'id'>, form: FormInstance) => void;
+  onCancel: () => void;
 }
 
 const CreateForm: React.FC<CreateFormProps> = (props) => {
@@ -21,7 +21,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
     name: values?.name || '',
     desc: values?.desc || '',
     href: values?.href || '',
-    type: values?.type || ''
+    type: values?.type || '',
   };
 
   const [form] = Form.useForm();
@@ -43,12 +43,12 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       visible={visible}
       onCancel={onCancel}
       footer={[
-        <Button key='back' onClick={() => { onCancel(); }}>
+        <Button key='back' onClick={() => onCancel()}>
           取消
         </Button>,
-        <Button key='submit' type='primary' htmlType='submit' loading={onSubmitLoading} onClick={async () => { await onFinish(); }}>
+        <Button key='submit' type='primary' htmlType='submit' loading={onSubmitLoading} onClick={() => onFinish()}>
           提交
-        </Button>
+        </Button>,
       ]}
     >
       <Form
@@ -59,7 +59,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           name: formVals.name,
           href: formVals.href,
           desc: formVals.desc,
-          type: formVals.type
+          type: formVals.type,
         }}
       >
         <Form.Item
@@ -68,8 +68,8 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           rules={[
             {
               required: true,
-              message: '请选择'
-            }
+              message: '请选择',
+            },
           ]}
         >
           <TypeSelect placeholder='请选择' />
@@ -86,8 +86,8 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
                 } else if (value.length > 15) {
                   throw new Error('长度不能大于15个字');
                 }
-              }
-            }
+              },
+            },
           ]}
         >
           <Input placeholder='请输入名称' />
@@ -102,13 +102,13 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
                 if (value === '' || !value) {
                   throw new Error('请输入网址');
                 } else if (
-                // eslint-disable-next-line no-useless-escape
+                  // eslint-disable-next-line no-useless-escape
                   !/(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/.test(value)
                 ) {
                   throw new Error('请输入正确的网址');
                 }
-              }
-            }
+              },
+            },
           ]}
         >
           <Input placeholder='请输入网址' />

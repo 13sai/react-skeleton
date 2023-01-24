@@ -33,5 +33,5 @@ export default {
   'universal-layout.menu.roles': '权限验证',
   'universal-layout.menu.roles.all': '用户都有权限',
   'universal-layout.menu.roles.user': 'Users有权限',
-  'universal-layout.menu.roles.test': 'Tests有权限'
+  'universal-layout.menu.roles.test': 'Tests有权限',
 };

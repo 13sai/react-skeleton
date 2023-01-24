@@ -3,22 +3,22 @@ import { Col, Row } from 'antd';
 
 import PageLoading from '@/components/PageLoading';
 
-const ArticleChartCard = lazy(async () => await import('./components/ArticleChartCard'));
-const WorksChartCard = lazy(async () => await import('./components/WorksChartCard'));
-const TopicsChartCard = lazy(async () => await import('./components/TopicsChartCard'));
-const LinksChartCard = lazy(async () => await import('./components/LinksChartCard'));
+const ArticleChartCard = lazy(() => import('./components/ArticleChartCard'));
+const WorksChartCard = lazy(() => import('./components/WorksChartCard'));
+const TopicsChartCard = lazy(() => import('./components/TopicsChartCard'));
+const LinksChartCard = lazy(() => import('./components/LinksChartCard'));
 
-const HotSearchCard = lazy(async () => await import('./components/HotSearchCard'));
-const HotTagsCard = lazy(async () => await import('./components/HotTagsCard'));
-const ArticleHitCard = lazy(async () => await import('./components/ArticleHitCard'));
-const WorksHitCard = lazy(async () => await import('./components/WorksHitCard'));
+const HotSearchCard = lazy(() => import('./components/HotSearchCard'));
+const HotTagsCard = lazy(() => import('./components/HotTagsCard'));
+const ArticleHitCard = lazy(() => import('./components/ArticleHitCard'));
+const WorksHitCard = lazy(() => import('./components/WorksHitCard'));
 
 const ChartColProps = {
   xs: 24,
   sm: 12,
   md: 12,
   lg: 12,
-  xl: 6
+  xl: 6,
 };
 
 const TableColProps = {
@@ -26,10 +26,10 @@ const TableColProps = {
   sm: 24,
   md: 24,
   lg: 12,
-  xl: 12
+  xl: 12,
 };
 
-function App () {
+function App() {
   return (
     <div className='layout-main-conent'>
       <Row gutter={24}>

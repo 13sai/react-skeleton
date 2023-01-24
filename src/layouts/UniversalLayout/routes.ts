@@ -11,7 +11,7 @@ const universalLayoutRotes: IRouter[] = [
     path: '/home',
     meta: {
       icon: 'home',
-      title: 'universal-layout.menu.home'
+      title: 'universal-layout.menu.home',
     },
     redirect: '/home/workplace',
     children: [
@@ -19,9 +19,9 @@ const universalLayoutRotes: IRouter[] = [
         path: 'workplace',
         meta: {
           icon: 'control',
-          title: 'universal-layout.menu.home.workplace'
+          title: 'universal-layout.menu.home.workplace',
         },
-        component: lazy(async () => await import('@/pages/Home'))
+        component: lazy(() => import('@/pages/Home')),
       },
       {
         path: 'custombreadcrumbs',
@@ -31,42 +31,42 @@ const universalLayoutRotes: IRouter[] = [
           breadcrumb: [
             {
               title: 'universal-layout.menu.home.custom-breadcrumbs',
-              path: '/home/custombreadcrumbs'
+              path: '/home/custombreadcrumbs',
             },
             {
               title: 'universal-layout.menu.home',
-              path: '/home'
+              path: '/home',
             },
             {
               title: 'universal-layout.menu.home.custom-breadcrumbs.blog',
-              path: 'https://github.13sai.com'
-            }
+              path: 'https://github.13sai.com',
+            },
           ],
           tabNavCloseBefore: (close: () => void): void => {
             // eslint-disable-next-line no-alert
             if (window.confirm('确认关闭吗')) {
               close();
             }
-          }
+          },
         },
-        component: lazy(async () => await import('@/pages/CustomBreadcrumbs'))
+        component: lazy(() => import('@/pages/CustomBreadcrumbs')),
       },
       {
         path: 'https://github.13sai.com/',
         meta: {
           icon: 'detail',
           title: 'universal-layout.menu.home.docs',
-          selectLeftMenu: '/home'
-        }
-      }
-    ]
+          selectLeftMenu: '/home',
+        },
+      },
+    ],
   },
   {
     path: '/component',
     redirect: '/component/icon/svg',
     meta: {
       icon: 'components',
-      title: 'universal-layout.menu.component'
+      title: 'universal-layout.menu.component',
     },
     children: [
       {
@@ -74,26 +74,26 @@ const universalLayoutRotes: IRouter[] = [
         redirect: '/component/icon/svg',
         meta: {
           icon: 'icon',
-          title: 'universal-layout.menu.component.icon'
+          title: 'universal-layout.menu.component.icon',
         },
         children: [
           {
             path: 'svg',
             meta: {
-              title: 'universal-layout.menu.component.icon.svg'
+              title: 'universal-layout.menu.component.icon.svg',
             },
-            component: lazy(async () => await import('@/pages/component/icon/svg'))
-          }
-        ]
+            component: lazy(() => import('@/pages/component/icon/svg')),
+          },
+        ],
       }
-    ]
+    ],
   },
   {
     path: '/pages',
     redirect: '/pages/list/basic',
     meta: {
       icon: 'page',
-      title: 'universal-layout.menu.pages'
+      title: 'universal-layout.menu.pages',
     },
     children: [
       {
@@ -101,138 +101,138 @@ const universalLayoutRotes: IRouter[] = [
         redirect: '/pages/list/basic',
         meta: {
           icon: 'list',
-          title: 'universal-layout.menu.pages.list'
+          title: 'universal-layout.menu.pages.list',
         },
         children: [
           {
             path: 'basic',
             meta: {
-              title: 'universal-layout.menu.pages.list.basic'
+              title: 'universal-layout.menu.pages.list.basic',
             },
-            component: lazy(async () => await import('@/pages/pagesample/list/basic'))
+            component: lazy(() => import('@/pages/pagesample/list/basic')),
           },
           {
             path: 'table',
             meta: {
-              title: 'universal-layout.menu.pages.list.table'
+              title: 'universal-layout.menu.pages.list.table',
             },
-            component: lazy(async () => await import('@/pages/pagesample/list/table'))
+            component: lazy(() => import('@/pages/pagesample/list/table')),
           },
           {
             path: 'search',
             redirect: '/pages/list/search/table',
             meta: {
-              title: 'universal-layout.menu.pages.list.search'
+              title: 'universal-layout.menu.pages.list.search',
             },
             children: [
               {
                 path: 'table',
                 meta: {
-                  title: 'universal-layout.menu.pages.list.search.table'
+                  title: 'universal-layout.menu.pages.list.search.table',
                 },
                 component: lazy(
-                  async () => await import('@/pages/pagesample/list/search/table')
-                )
-              }
-            ]
-          }
-        ]
+                  () => import('@/pages/pagesample/list/search/table')
+                ),
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'form',
         redirect: '/pages/form/basic',
         meta: {
           icon: 'edit',
-          title: 'universal-layout.menu.pages.form'
+          title: 'universal-layout.menu.pages.form',
         },
         children: [
           {
             path: 'basic',
             meta: {
-              title: 'universal-layout.menu.pages.form.basic'
+              title: 'universal-layout.menu.pages.form.basic',
             },
-            component: lazy(async () => await import('@/pages/pagesample/form/basic'))
+            component: lazy(() => import('@/pages/pagesample/form/basic')),
           },
           {
             path: 'complex',
             meta: {
-              title: 'universal-layout.menu.pages.form.complex'
+              title: 'universal-layout.menu.pages.form.complex',
             },
-            component: lazy(async () => await import('@/pages/pagesample/form/complex'))
-          }
-        ]
+            component: lazy(() => import('@/pages/pagesample/form/complex')),
+          },
+        ],
       },
       {
         path: 'detail',
         meta: {
           icon: 'detail',
-          title: 'universal-layout.menu.pages.detail'
+          title: 'universal-layout.menu.pages.detail',
         },
         children: [
           {
             path: 'basic',
             meta: {
               title: 'universal-layout.menu.pages.detail.basic',
-              tabNavType: 'querypath'
+              tabNavType: 'querypath',
             },
-            component: lazy(async () => await import('@/pages/pagesample/detail/basic'))
+            component: lazy(() => import('@/pages/pagesample/detail/basic')),
           },
           {
             path: 'module',
             meta: {
               title: 'universal-layout.menu.pages.detail.module',
-              tabNavType: 'querypath'
+              tabNavType: 'querypath',
             },
-            component: lazy(async () => await import('@/pages/pagesample/detail/module'))
+            component: lazy(() => import('@/pages/pagesample/detail/module')),
           },
           {
             path: 'table',
             meta: {
               title: 'universal-layout.menu.pages.detail.table',
-              tabNavType: 'querypath'
+              tabNavType: 'querypath',
             },
-            component: lazy(async () => await import('@/pages/pagesample/detail/table'))
-          }
-        ]
-      }
-    ]
+            component: lazy(() => import('@/pages/pagesample/detail/table')),
+          },
+        ],
+      },
+    ],
   },
   {
     path: '/roles',
     redirect: '/roles/all',
     meta: {
       icon: 'permissions',
-      title: 'universal-layout.menu.roles'
+      title: 'universal-layout.menu.roles',
     },
     children: [
       {
         path: 'all',
         meta: {
           icon: 'detail',
-          title: 'universal-layout.menu.roles.all'
+          title: 'universal-layout.menu.roles.all',
         },
-        component: lazy(async () => await import('@/pages/roles/all'))
+        component: lazy(() => import('@/pages/roles/all')),
       },
       {
         path: 'user',
         meta: {
           icon: 'detail',
           title: 'universal-layout.menu.roles.user',
-          roles: ['user']
+          roles: ['user'],
         },
-        component: lazy(async () => await import('@/pages/roles/user'))
+        component: lazy(() => import('@/pages/roles/user')),
       },
       {
         path: 'test',
         meta: {
           icon: 'detail',
           title: 'universal-layout.menu.roles.test',
-          roles: ['test']
+          roles: ['test'],
         },
-        component: lazy(async () => await import('@/pages/roles/test'))
-      }
-    ]
-  }
+        component: lazy(() => import('@/pages/roles/test')),
+      },
+    ],
+  },
 ];
 
 export default universalLayoutRotes;

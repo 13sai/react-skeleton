@@ -29,17 +29,17 @@ const routes = createUseRoutes([
   {
     path: '/',
     redirect: '/home',
-    children: UniversalLayoutRoutes
+    children: UniversalLayoutRoutes,
   },
   {
     path: '/user',
     redirect: '/user/login',
-    children: UserLayoutRoutes
+    children: UserLayoutRoutes,
   },
   {
     path: '*',
-    component: lazy(async () => await import('../pages/404'))
-  }
+    component: lazy(() => import('../pages/404')),
+  },
 ]);
 
 /**
@@ -47,7 +47,7 @@ const routes = createUseRoutes([
  */
 const layoutToRoutes = {
   UniversalLayout: pathKeyCreateUseRoutes([routes[0]]),
-  UserLayout: pathKeyCreateUseRoutes([routes[1]])
+  UserLayout: pathKeyCreateUseRoutes([routes[1]]),
 };
 
 export const SuspenseLazy = memo(

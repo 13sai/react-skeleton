@@ -12,28 +12,28 @@ import enUS from 'antd/es/locale/en_US';
 // antd 语言包
 export const antdMessages: { [key in I18nKey]: any } = {
   'zh-CN': zhCN,
-  'en-US': enUS
+  'en-US': enUS,
 };
 
 // 当前的语言
 const sysLocale = getLocale();
 export const i18nLocaleState = atom<I18nKey>({
   key: 'i18nLocaleState',
-  default: antdMessages[sysLocale] ? sysLocale : defaultLang
+  default: antdMessages[sysLocale] ? sysLocale : defaultLang,
 });
 
 // 自定义语言包
 export const i18nMessagesState = atom<I18n>({
   key: 'i18nMessagesState',
   default: {
-    ...globalLocales
-  }
+    ...globalLocales,
+  },
 });
 
 // antd 对应当前语言的内容
 export const antdMessageState = selector({
   key: 'antdMessageState',
-  get: ({ get }) => antdMessages[get(i18nLocaleState)] || antdMessages['zh-CN']
+  get: ({ get }) => antdMessages[get(i18nLocaleState)] || antdMessages['zh-CN'],
 });
 
 // 自定义语言 对应当前语言的内容
@@ -43,9 +43,9 @@ export const useI18n = selectorFamily({
     (locales: I18n) =>
       ({ get }) => {
         const i18nLocale = get(i18nLocaleState);
-        const i18nMessage = (get(i18nMessagesState)[i18nLocale] != null) || {};
-        const locale = (locales[i18nLocale] != null) || {};
+        const i18nMessage = get(i18nMessagesState)[i18nLocale] || {};
+        const locale = locales[i18nLocale] || {};
 
         return (key: string) => i18nMessage[key] || locale[key] || key;
-      }
+      },
 });

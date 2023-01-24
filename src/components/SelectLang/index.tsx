@@ -12,7 +12,7 @@ import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { I18nKey } from '@/types/i18n';
 
 export interface SelectLangProps {
-  className?: string
+  className?: string;
 }
 
 export default memo(({ className }: SelectLangProps) => {
@@ -24,16 +24,16 @@ export default memo(({ className }: SelectLangProps) => {
         key: 'zh-CN',
         label: <> 简体中文</>,
         icon: <>🇨🇳 </>,
-        disabled: i18nLocale === 'zh-CN'
+        disabled: i18nLocale === 'zh-CN',
       },
       {
         key: 'en-US',
         label: <> English</>,
         icon: <>🇺🇸 </>,
-        disabled: i18nLocale === 'en-US'
-      }
+        disabled: i18nLocale === 'en-US',
+      },
     ],
-    [i18nLocale]
+    [i18nLocale],
   );
 
   const onClick: MenuProps['onClick'] = useCallback(
@@ -42,10 +42,10 @@ export default memo(({ className }: SelectLangProps) => {
       setI18nLocale(lang);
       setLocale(lang);
     },
-    [i18nLocale, setI18nLocale]
+    [i18nLocale, setI18nLocale],
   );
   return (
-    <Dropdown className={className} menu={{ items, onClick }}>
+    <Dropdown className={className} menu={{items, onClick}}>
       <span>
         <IconSvg name='language-outline' />
       </span>

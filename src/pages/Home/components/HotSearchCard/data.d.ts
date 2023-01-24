@@ -1,4 +1,4 @@
 export interface TableListItem {
-  name: string
-  hit: number
+  name: string;
+  hit: number;
 }

@@ -27,10 +27,10 @@ export const createUseRoutes = (
     routesItem.path = item.path.startsWith('/')
       ? item.path
       : parentPath.endsWith('/')
-      ? parentPath
-      : parentPath + '/' + item.path;
+        ? parentPath
+        : parentPath + '/' + item.path;
 
-    if (item.component != null) {
+    if (item.component) {
       routesItem.element = createElement(item.component);
     }
 
@@ -42,7 +42,7 @@ export const createUseRoutes = (
       });
     }
 
-    if (item.children != null) {
+    if (item.children) {
       children.push(...createUseRoutes(item.children, routesItem.path));
     }
 
@@ -66,7 +66,7 @@ export const pathKeyCreateUseRoutes = (
       ...item,
     };
 
-    if (item.children != null) {
+    if (item.children) {
       items = merge(items, pathKeyCreateUseRoutes(item.children));
     }
   }
@@ -93,14 +93,14 @@ export const formatRoutes = (
       path = item.path.startsWith('/')
         ? item.path
         : parentPath.endsWith('/')
-        ? parentPath
-        : parentPath + '/' + item.path;
+          ? parentPath
+          : parentPath + '/' + item.path;
     }
     newItem.path = path;
 
-    const meta = item.meta || IRouteMeta;
+    const meta = item.meta || {};
     const parent =
-      meta.parentPath != null && meta.parentPath.length > 0
+      meta.parentPath && meta.parentPath.length > 0
         ? meta.parentPath
         : parentPaths;
     meta.parentPath = parent;
@@ -108,7 +108,7 @@ export const formatRoutes = (
 
     let children: IRouter[] | undefined;
     let pkChildren: IPathKeyRouter | undefined;
-    if (item.children != null) {
+    if (item.children) {
       const formatRoute = formatRoutes(item.children, path, [...parent, path]);
 
       children = formatRoute.router;
@@ -119,7 +119,7 @@ export const formatRoutes = (
 
     items.push(newItem);
     newRoutes[path] = newItem;
-    if (pkChildren != null) {
+    if (pkChildren) {
       newRoutes = merge(newRoutes, pkChildren);
     }
   }
@@ -159,7 +159,7 @@ export const getBreadcrumbRoutes = (
   if (!route.path) return [];
 
   if (!route.meta?.breadcrumb) {
-    const parantPath = route.meta?.parentPath != null || [];
+    const parantPath = route.meta?.parentPath || [];
     const pathRoutes = getPathsRoutes(parantPath, routes);
     const breadcrumb: Breadcrumb[] = [];
 
@@ -200,14 +200,14 @@ export const equalTabNavRoute = (
 ): boolean => {
   let is = false;
   switch (type) {
-    case 'querypath': // path + query
-      is =
+  case 'querypath': // path + query
+    is =
         equalObject(qs.parse(location1.search), qs.parse(location2.search)) &&
         location1.pathname === location2.pathname;
-      break;
-    default: // path
-      is = location1.pathname === location2.pathname;
-      break;
+    break;
+  default: // path
+    is = location1.pathname === location2.pathname;
+    break;
   }
 
   return is;

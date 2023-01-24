@@ -1,25 +1,25 @@
 export interface TableListQueryParams {
-  page: number
-  per: number
+  page: number;
+  per: number;
 }
 
 export interface PaginationConfig {
-  total: number
-  current: number
-  pageSize: number
-  showSizeChanger: boolean
-  showQuickJumper: boolean
+  total: number;
+  current: number;
+  pageSize: number;
+  showSizeChanger: boolean;
+  showQuickJumper: boolean;
 }
 
 export interface TableListItem {
-  id: number
-  name: string
-  desc: string
-  href: string
-  type: string
+  id: number;
+  name: string;
+  desc: string;
+  href: string;
+  type: string;
 }
 
 export interface IResponseData {
-  list: TableListItem[]
-  total: number
+  list: TableListItem[];
+  total: number;
 }

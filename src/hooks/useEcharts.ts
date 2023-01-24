@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 import * as echarts from 'echarts';
 
-export type EChartsOption = echarts.EChartsOption
+export type EChartsOption = echarts.EChartsOption;
 
 const useEcharts = (
   ref: React.RefObject<HTMLDivElement | HTMLCanvasElement | undefined>,
   initOption: EChartsOption,
   cb?: (ec: echarts.ECharts) => any,
-  theme = ''
+  theme = '',
 ): {
-    echart: echarts.ECharts | undefined
-    cb: (ec: echarts.ECharts) => void
-  } => {
+  echart: echarts.ECharts | undefined;
+  cb: (ec: echarts.ECharts) => void;
+} => {
   const [chart, setChart] = useState<echarts.ECharts>();
 
   const callback = (ec: echarts.ECharts) => {
@@ -22,7 +22,7 @@ const useEcharts = (
   };
 
   useEffect(() => {
-    if (ref.current != null) {
+    if (ref.current) {
       const c = echarts.init(ref.current, theme);
       setChart(c);
       c.setOption(initOption);
@@ -43,7 +43,7 @@ const useEcharts = (
 
   return {
     echart: chart,
-    cb: callback
+    cb: callback,
   };
 };
 

@@ -21,7 +21,7 @@ import useTitle from '@/hooks/useTitle';
 import './css/index.less';
 
 export interface UniversalLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default memo(({ children }: UniversalLayoutProps) => {
@@ -48,7 +48,7 @@ export default memo(({ children }: UniversalLayoutProps) => {
         routerPathKeyRouter.pathKeyRouter
       ).map((item) => ({
         ...item,
-        title: t(item.title)
+        title: t(item.title),
       })),
     [location, routerPathKeyRouter, t]
   );

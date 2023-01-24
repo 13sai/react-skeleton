@@ -10,7 +10,7 @@ import { ResponseData } from '@/utils/request';
 import { queryCurrent } from '@/services/user';
 
 export interface SecurityLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default memo(({ children }: SecurityLayoutProps) => {
@@ -25,7 +25,7 @@ export default memo(({ children }: SecurityLayoutProps) => {
       const { data } = response;
       setUser({
         ...user,
-        ...data
+        ...data,
       });
     } catch (error: any) {
       console.log('error', error);

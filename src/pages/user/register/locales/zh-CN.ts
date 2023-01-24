@@ -8,5 +8,5 @@ export default {
   'page.user.register.form.title': '注册账户',
   'page.user.register.form.btn-submit': '注册',
   'page.user.register.form.btn-jump': '已有账户？现在登录！',
-  'page.user.register.form.register-success': '注册成功，请登录！'
+  'page.user.register.form.register-success': '注册成功，请登录！',
 };

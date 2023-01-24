@@ -6,23 +6,23 @@ import { createData } from './service';
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 7 }
+    sm: { span: 7 },
   },
   wrapperCol: {
     xs: { span: 24 },
     sm: { span: 12 },
-    md: { span: 10 }
-  }
+    md: { span: 10 },
+  },
 };
 
 const submitFormLayout = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
-    sm: { span: 10, offset: 7 }
-  }
+    sm: { span: 10, offset: 7 },
+  },
 };
 
-function App () {
+function App() {
   const [form] = Form.useForm();
   const onReset = () => {
     form.resetFields();
@@ -56,8 +56,8 @@ function App () {
             rules={[
               {
                 required: true,
-                message: '必填'
-              }
+                message: '必填',
+              },
             ]}
           >
             <Input placeholder='请输入' />
@@ -70,8 +70,8 @@ function App () {
             rules={[
               {
                 required: true,
-                message: '必填'
-              }
+                message: '必填',
+              },
             ]}
           >
             <DatePicker.RangePicker
@@ -90,8 +90,8 @@ function App () {
             rules={[
               {
                 required: true,
-                message: '请选择'
-              }
+                message: '请选择',
+              },
             ]}
           >
             <Select placeholder='请选择' allowClear>

@@ -9,12 +9,12 @@ import { IRouter } from '@/types/router';
 import { Theme } from '@/types/settings';
 
 export interface LeftSiderProps {
-  menuData: IRouter[]
-  routeItem: IRouter
-  userRoles?: string[]
-  collapsed?: boolean
-  theme?: Theme
-  leftSiderFixed?: boolean
+  menuData: IRouter[];
+  routeItem: IRouter;
+  userRoles?: string[];
+  collapsed?: boolean;
+  theme?: Theme;
+  leftSiderFixed?: boolean;
 }
 
 export default memo(
@@ -24,7 +24,7 @@ export default memo(
     userRoles = [],
     collapsed = false,
     theme = 'dark',
-    leftSiderFixed = true
+    leftSiderFixed = true,
   }: LeftSiderProps) => (
     <div
       id='universallayout-left'
@@ -34,17 +34,15 @@ export default memo(
           <Link
             to='/'
             className='logo-url'>
-            {collapsed
-              ? (
-                <img
-                  alt=''
-                  src={logo}
-                  width='30'
-                />
-              )
-              : (
-                <h3 className='logo-title'>React Skeleton</h3>
-              )}
+            {collapsed ? (
+              <img
+                alt=''
+                src={logo}
+                width='30'
+              />
+            ) : (
+              <h3 className='logo-title'>React Skeleton</h3>
+            )}
           </Link>
         </div>
         <div className='universallayout-left-menu'>

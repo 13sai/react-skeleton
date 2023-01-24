@@ -26,10 +26,10 @@ const svgIcons: any = [
   'arrow-left2',
   'arrow-right2',
   'page',
-  'list'
+  'list',
 ];
 
-function App () {
+function App() {
   return (
     <div className='layout-main-conent'>
       <Card bordered={false}>

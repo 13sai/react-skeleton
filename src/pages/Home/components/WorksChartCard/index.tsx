@@ -17,17 +17,17 @@ const worksChartOption: EChartsOption = {
     left: '0',
     right: '0',
     top: '0',
-    bottom: '0'
+    bottom: '0',
   },
   xAxis: {
     show: false,
     boundaryGap: false,
     data: [
       // '03-01','03-02','03-03','03-04','03-05','03-06','03-07'
-    ]
+    ],
   },
   yAxis: {
-    show: false
+    show: false,
   },
   series: [
     {
@@ -41,25 +41,25 @@ const worksChartOption: EChartsOption = {
           colorStops: [
             {
               offset: 0,
-              color: '#A9F387' // 0% 处的颜色
+              color: '#A9F387', // 0% 处的颜色
             },
             {
               offset: 1,
-              color: '#48D8BF' // 100% 处的颜色
-            }
+              color: '#48D8BF', // 100% 处的颜色
+            },
           ],
-          globalCoord: false // 缺省为 false
-        } as any
+          globalCoord: false, // 缺省为 false
+        } as any,
       },
       lineStyle: {
-        width: 0
+        width: 0,
       },
       itemStyle: {
         borderWidth: 2,
-        color: '#48D8BF'
-      }
-    }
-  ]
+        color: '#48D8BF',
+      },
+    },
+  ],
 };
 
 const WorksChartCard: React.FC = () => {
@@ -70,8 +70,8 @@ const WorksChartCard: React.FC = () => {
     num: 0,
     chart: {
       day: [],
-      num: []
-    }
+      num: [],
+    },
   });
 
   const total = useMemo(() => visitData.total, [visitData]);
@@ -87,23 +87,23 @@ const WorksChartCard: React.FC = () => {
       const vData = {
         total: data?.total || 0,
         num: data?.num || 0,
-        chart: ((data?.chart) != null) || {
+        chart: data?.chart || {
           day: [],
-          num: []
-        }
+          num: [],
+        },
       };
       setVisitData(vData);
 
       const option: EChartsOption = {
         xAxis: {
-          data: vData.chart.day
+          data: vData.chart.day,
         },
         series: [
           {
             name: '新增',
-            data: vData.chart.num
-          }
-        ]
+            data: vData.chart.num,
+          },
+        ],
       };
       chart.setOption(option);
     } catch (error: any) {

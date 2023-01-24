@@ -8,7 +8,7 @@ import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
 import { ColumnsType } from 'antd/lib/table';
 
-function App () {
+function App() {
   // 获取数据
   const [loading, setLoading] = useState<boolean>(false);
   const [list, setList] = useState<TableListItem[]>([]);
@@ -17,21 +17,21 @@ function App () {
     current: 1,
     pageSize: 10,
     showSizeChanger: true,
-    showQuickJumper: true
+    showQuickJumper: true,
   });
   const getList = async (current: number): Promise<void> => {
     setLoading(true);
 
     const response: ResponseData<IResponseData> = await queryList({
       page: current,
-      per: 10
+      per: 10,
     });
-    const data = (response.data != null) || { list: [], total: 0 };
+    const data = response.data || { list: [], total: 0 };
     setList(data.list || []);
     setPagination({
       ...pagination,
       current,
-      total: data.total || 0
+      total: data.total || 0,
     });
 
     setLoading(false);
@@ -56,7 +56,7 @@ function App () {
         getList(pagination.current);
 
         setDeleteLoading([]);
-      }
+      },
     });
   };
 
@@ -71,7 +71,7 @@ function App () {
     const response: ResponseData<TableListItem> = await detailData(id);
     const { data } = response;
     setUpdateData({
-      ...data
+      ...data,
     });
     setUpdateFormVisible(true);
 
@@ -115,7 +115,7 @@ function App () {
       title: '序号',
       dataIndex: 'index',
       width: 80,
-      render: (_, record, index) => <>{(pagination.current - 1) * pagination.pageSize + index + 1}</>
+      render: (_, record, index) => <>{(pagination.current - 1) * pagination.pageSize + index + 1}</>,
     },
     {
       title: '名称',
@@ -124,16 +124,16 @@ function App () {
         <a href={record.href} target='_blank' rel='noreferrer'>
           {record.name}
         </a>
-      )
+      ),
     },
     {
       title: '备注',
-      dataIndex: 'desc'
+      dataIndex: 'desc',
     },
     {
       title: '位置',
       dataIndex: 'type',
-      render: (_, record) => (record.type === 'header' ? <Tag color='green'>头部</Tag> : <Tag color='cyan'>底部</Tag>)
+      render: (_, record) => (record.type === 'header' ? <Tag color='green'>头部</Tag> : <Tag color='cyan'>底部</Tag>),
     },
     {
       title: '操作',
@@ -144,17 +144,17 @@ function App () {
           <Button
             type='link'
             loading={detailUpdateLoading.includes(record.id)}
-            onClick={async () => { await detailUpdateData(record.id); }}
+            onClick={() => detailUpdateData(record.id)}
           >
             编辑
           </Button>
           <Divider type='vertical' />
-          <Button type='link' loading={deleteLoading.includes(record.id)} onClick={() => { deleteTableData(record.id); }}>
+          <Button type='link' loading={deleteLoading.includes(record.id)} onClick={() => deleteTableData(record.id)}>
             删除
           </Button>
         </>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -162,7 +162,7 @@ function App () {
       <Card
         bordered={false}
         title={
-          <Button type='primary' onClick={() => { setCreateFormVisible(true); }}>
+          <Button type='primary' onClick={() => setCreateFormVisible(true)}>
             新增
           </Button>
         }
@@ -186,29 +186,27 @@ function App () {
             ...pagination,
             onChange: (page: number) => {
               getList(page);
-            }
+            },
           }}
         />
       </Card>
 
       <CreateForm
-        onCancel={() => { setCreateFormVisible(false); }}
+        onCancel={() => setCreateFormVisible(false)}
         visible={createFormVisible}
         onSubmit={createSubmit}
         onSubmitLoading={createSubmitLoading}
       />
 
-      {updateFormVisible && Object.keys(updateData).length > 0
-        ? (
-          <UpdateForm
-            values={updateData}
-            onCancel={async () => { await updataFormCancel(); }}
-            visible={updateFormVisible}
-            onSubmit={updateSubmit}
-            onSubmitLoading={updateSubmitLoading}
-          />
-        )
-        : null}
+      {updateFormVisible && Object.keys(updateData).length > 0 ? (
+        <UpdateForm
+          values={updateData}
+          onCancel={() => updataFormCancel()}
+          visible={updateFormVisible}
+          onSubmit={updateSubmit}
+          onSubmitLoading={updateSubmitLoading}
+        />
+      ) : null}
     </div>
   );
 }

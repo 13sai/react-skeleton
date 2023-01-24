@@ -7,17 +7,17 @@ const UserLayoutRoutes: IRouter[] = [
   {
     path: `${pathPre}/login`,
     meta: {
-      title: 'user-layout.menu.login'
+      title: 'user-layout.menu.login',
     },
-    component: lazy(async () => await import('@/pages/user/login'))
+    component: lazy(() => import('@/pages/user/login')),
   },
   {
     path: `${pathPre}/register`,
     meta: {
-      title: 'user-layout.menu.register'
+      title: 'user-layout.menu.register',
     },
-    component: lazy(async () => await import('@/pages/user/register'))
-  }
+    component: lazy(() => import('@/pages/user/register')),
+  },
 ];
 
 export default UserLayoutRoutes;

@@ -8,5 +8,5 @@ export default {
   'page.user.register.form.title': 'Account Registration',
   'page.user.register.form.btn-submit': 'Register',
   'page.user.register.form.btn-jump': 'Already have an account?',
-  'page.user.register.form.register-success': 'Registered successfully, please log in!'
+  'page.user.register.form.register-success': 'Registered successfully, please log in!',
 };
