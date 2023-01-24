@@ -8,7 +8,7 @@ import locales from './locales';
 
 import IconSvg from '@/components/IconSvg';
 
-import { setToken } from '@/utils/localToken';
+import { setToken } from '@/utils/token';
 import { ResponseData } from '@/utils/request';
 import { LoginParamsType, LoginResponseData } from './data.d';
 import { accountLogin } from './service';
@@ -26,7 +26,9 @@ export default memo(() => {
   const handleSubmit = async (values: LoginParamsType) => {
     setSubmitLoading(true);
     try {
-      const response: ResponseData<LoginResponseData> = await accountLogin(values);
+      const response: ResponseData<LoginResponseData> = await accountLogin(
+        values
+      );
       const { data } = response;
       setToken(data?.token || '');
       setLoginStatus('ok');
@@ -45,18 +47,22 @@ export default memo(() => {
   return (
     <div className={style.main}>
       <h1 className={style.title}>{t('page.user.login.form.title')}</h1>
-      <Form name='basic' onFinish={handleSubmit}>
+      <Form
+        name='basic'
+        onFinish={handleSubmit}>
         <Form.Item
           label=''
           name='username'
           rules={[
             {
               required: true,
-              message: t('page.user.login.form-item-username.required')
-            }
-          ]}
-        >
-          <Input placeholder={t('page.user.login.form-item-username')} prefix={<IconSvg name='user' />} />
+              message: t('page.user.login.form-item-username.required'),
+            },
+          ]}>
+          <Input
+            placeholder={t('page.user.login.form-item-username')}
+            prefix={<IconSvg name='user' />}
+          />
         </Form.Item>
         <Form.Item
           label=''
@@ -64,10 +70,9 @@ export default memo(() => {
           rules={[
             {
               required: true,
-              message: t('page.user.login.form-item-password.required')
-            }
-          ]}
-        >
+              message: t('page.user.login.form-item-password.required'),
+            },
+          ]}>
           <Input.Password
             placeholder={t('page.user.login.form-item-password')}
             prefix={<IconSvg name='pwd' />}
@@ -76,16 +81,26 @@ export default memo(() => {
         </Form.Item>
 
         <Form.Item>
-          <Button type='primary' className={style.submit} htmlType='submit' loading={false}>
+          <Button
+            type='primary'
+            className={style.submit}
+            htmlType='submit'
+            loading={false}>
             {t('page.user.login.form.btn-submit')}
           </Button>
           <div className={style['text-align-right']}>
-            <Link to='/user/register'>{t('page.user.login.form.btn-jump')}</Link>
+            <Link to='/user/register'>
+              {t('page.user.login.form.btn-jump')}
+            </Link>
           </div>
         </Form.Item>
 
         {loginStatus === 'error' && !submitLoading && (
-          <Alert message={t('page.user.login.form.login-error')} type='error' showIcon />
+          <Alert
+            message={t('page.user.login.form.login-error')}
+            type='error'
+            showIcon
+          />
         )}
       </Form>
     </div>
