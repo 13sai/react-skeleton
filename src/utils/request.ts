@@ -10,19 +10,19 @@ export interface ResponseData<T = unknown> {
 }
 
 const customCodeMessage: { [key: number]: string } = {
-  10002: '登入信息已失效，请重新登入再操作',
+  10002: '信息已失效，请重新登录',
 };
 
 const serverCodeMessage: { [key: number]: string } = {
-  200: '服务器成功返回请求的数据',
+  200: 'success',
   400: 'Bad Request',
   401: 'Unauthorized',
   403: 'Forbidden',
   404: 'Not Found',
-  500: '服务器发生错误，请检查服务器(Internal Server Error)',
-  502: '网关错误(Bad Gateway)',
-  503: '服务不可用，服务器暂时过载或维护(Service Unavailable)',
-  504: '网关超时(Gateway Timeout)',
+  500: 'Internal Server Error',
+  502: 'Bad Gateway',
+  503: 'Service Unavailable',
+  504: 'Gateway Timeout',
 };
 
 /**
@@ -74,8 +74,8 @@ const errorHandler = (error: any) => {
  */
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_APIHOST || '', // url = api url + request url
-  withCredentials: false, // 当跨域请求时发送cookie
-  timeout: 5000, // 请求超时时间,5000(单位毫秒), 0 不做限制
+  withCredentials: false,
+  timeout: 10000, // 请求超时时间,10000(单位毫秒), 0 不做限制
 });
 
 /**

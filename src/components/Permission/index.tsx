@@ -12,7 +12,7 @@ const Forbidden = (
     subTitle='Sorry, you are not authorized to access this page.'
     extra={
       <Button type='primary'>
-        <Link to='/'>Go Home</Link>
+        <Link to='/'>Back Home</Link>
       </Button>
     }
   />

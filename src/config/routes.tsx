@@ -53,6 +53,7 @@ export const SuspenseLazy = memo(
   )
 );
 
+// eslint-disable-next-line react/display-name
 export default memo(() => {
   const routesElement = useRoutes(routes);
   if (routesElement == null) {

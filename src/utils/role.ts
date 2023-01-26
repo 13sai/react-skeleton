@@ -1,10 +1,5 @@
 /**
  * 根据 自定义传入验证的权限名 判断当前用户是否有权限
- *
- * @format
- * @param userRoles string[] 用户的权限
- * @param roles string | string[] 自定义验证的权限名
- * @returns boolean
  */
 export const permission = (
   userRoles: string[],

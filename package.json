@@ -1,12 +1,12 @@
 {
   "name": "react-skeleton",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less"
   },
   "dependencies": {
@@ -44,15 +44,5 @@
     "prettier": "^2.8.3",
     "typescript": "*",
     "vite": "^4.0.0"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.less": "stylelint --syntax less",
-    "*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "*.{js,jsx,tsx,ts,less,md,json}": [
-      "prettier --write"
-    ]
   }
 }

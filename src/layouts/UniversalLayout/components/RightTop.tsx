@@ -87,7 +87,7 @@ export default memo(
                     src={logo}
                     width='30'
                   />
-                  <h3 className='logo-title'>AdminAntdVue</h3>
+                  <h3 className='logo-title'>React Skeleton</h3>
                 </Link>
               </div>
               <div className='universallayout-top-menu'>

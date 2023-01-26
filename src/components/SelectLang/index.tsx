@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { memo, useCallback, useMemo } from 'react';
 import { Dropdown } from 'antd';
 import type { MenuProps } from 'antd';

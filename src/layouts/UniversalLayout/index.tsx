@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { /* Outlet, */ useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { useRecoilValue } from 'recoil';

@@ -198,17 +198,10 @@ export const equalTabNavRoute = (
   location2: Location,
   type: TabNavType = 'path'
 ): boolean => {
-  let is = false;
-  switch (type) {
-  case 'querypath': // path + query
-    is =
-        equalObject(qs.parse(location1.search), qs.parse(location2.search)) &&
-        location1.pathname === location2.pathname;
-    break;
-  default: // path
-    is = location1.pathname === location2.pathname;
-    break;
+  if (type === 'querypath') {
+    return equalObject(qs.parse(location1.search), qs.parse(location2.search)) &&
+    location1.pathname === location2.pathname;
+  } else {
+    return location1.pathname === location2.pathname;
   }
-
-  return is;
 };

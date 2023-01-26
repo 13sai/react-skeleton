@@ -6,7 +6,7 @@ import { BrowserRouter /* , HashRouter */ } from 'react-router-dom';
 import 'virtual:svg-icons-register';
 
 import 'antd/dist/reset.css';
-// 全局css
+
 import '@/assets/css/index.less';
 
 // App
