@@ -1,5 +1,4 @@
 import { MockMethod } from 'vite-plugin-mock';
-const ajaxHeadersTokenKey = 'token';
 export default [
 
   {
@@ -22,14 +21,14 @@ export default [
     url: '/api/500',
     method: 'get',
     // statusCode: 401,
-    response: ({ headers, body }) => {
+    response: () => {
       return {
         timestamp: 1513932555104,
         status: 500,
         error: 'error',
         message: 'error',
         path: '/500',
-      }
+      };
     },
   },
 ] as MockMethod[];

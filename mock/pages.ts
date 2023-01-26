@@ -1,11 +1,10 @@
 import mockjs from 'mockjs';
 import { MockMethod } from 'vite-plugin-mock';
-const ajaxHeadersTokenKey = 'token';
 export default [
   {
     url: '/api/pages/list/:id',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: mockjs.mock({
@@ -21,7 +20,7 @@ export default [
   {
     url: '/api/pages/list',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return {
         code: 0,
         data: mockjs.mock({
@@ -42,47 +41,47 @@ export default [
   {
     url: '/api/pages/list',
     method: 'post',
-    response: ({ headers, body }) => {
-        return {
-          code: 0,
-          data: '',
-        };
+    response: () => {
+      return {
+        code: 0,
+        data: '',
+      };
     },
   },
   {
     url: '/api/pages/list/:id',
     method: 'put',
-    response: ({ headers, body }) => {
-        return {
-          code: 0,
-          data: '',
-        };
+    response: () => {
+      return {
+        code: 0,
+        data: '',
+      };
     },
   },
   {
     url: '/api/pages/list/:id',
     method: 'delete',
-    response: ({ headers, body }) => {
-        return {
-          code: 0,
-          data: '',
-        };
+    response: () => {
+      return {
+        code: 0,
+        data: '',
+      };
     },
   },
   {
     url: '/api/pages/form',
     method: 'post',
-    response: ({ headers, body }) => {
-        return {
-          code: 0,
-          data: '',
-        };
+    response: () => {
+      return {
+        code: 0,
+        data: '',
+      };
     },
   },
   {
     url: '/api/pages/detail',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return{
         code: 0,
         data: mockjs.mock({

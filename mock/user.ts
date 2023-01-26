@@ -1,6 +1,6 @@
 import mockjs from 'mockjs';
 import { MockMethod } from 'vite-plugin-mock';
-const ajaxHeadersTokenKey = 'token';
+const tokenKey = 'token';
 export default [
   {
     url: '/api/user/login',
@@ -10,20 +10,20 @@ export default [
       const { password, username } = body;
       const send = { code: 0, data: {}, msg: '' };
       if (username === 'admin' && password === '123456') {
-          send['data'] = {
-            token: 'admin',
-          };
+        send['data'] = {
+          token: 'admin',
+        };
       } else if (username === 'user' && password === '123456') {
-          send['data'] = {
-            token: 'user',
-          };
+        send['data'] = {
+          token: 'user',
+        };
       } else if (username === 'test' && password === '123456') {
-          send['data'] = {
-            token: 'test',
-          };
+        send['data'] = {
+          token: 'test',
+        };
       } else {
-          send['code'] = 201;
-          send['msg'] = 'Wrong username or password';
+        send['code'] = 201;
+        send['msg'] = 'Wrong username or password';
       }
       return send;
     },
@@ -31,7 +31,7 @@ export default [
   {
     url: '/api/user/register',
     method: 'POST',
-    response: ({ body }) => {
+    response: () => {
       return {
         code: 0,
         data: '',
@@ -42,7 +42,7 @@ export default [
   {
     url: '/api/user/message',
     method: 'GET',
-    response: ({ body }) => {
+    response: () => {
       return {
         code: 0,
         data: mockjs.mock('@integer(0,99)'),
@@ -53,8 +53,8 @@ export default [
     url: '/api/user/info',
     method: 'get',
     // statusCode: 401,
-    response: ({ headers, body }) => {
-      if (headers[ajaxHeadersTokenKey] === 'admin') {
+    response: ({ headers }) => {
+      if (headers[tokenKey] === 'admin') {
         return {
           code: 0,
           data: {
@@ -64,7 +64,7 @@ export default [
             roles: ['admin'],
           },
         };
-      } else if (headers[ajaxHeadersTokenKey] === 'user') {
+      } else if (headers[tokenKey] === 'user') {
         return {
           code: 0,
           data: {
@@ -74,8 +74,8 @@ export default [
             roles: ['user'],
           },
         };
-    } else if (headers[ajaxHeadersTokenKey] === 'test') {
-      return {
+      } else if (headers[tokenKey] === 'test') {
+        return {
           code: 0,
           data: {
             id: 3,
@@ -84,13 +84,13 @@ export default [
             roles: ['test'],
           },
         };
-    } else {
+      } else {
         return {
           code: 10002,
           data: {},
           msg: '未登录',
         };
-    }
+      }
     },
   },
 ] as MockMethod[];

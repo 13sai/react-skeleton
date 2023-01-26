@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
+    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./src ./mock --fix",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less"
   },
   "dependencies": {

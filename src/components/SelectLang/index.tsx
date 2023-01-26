@@ -13,7 +13,7 @@ import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { I18nKey } from '@/types/i18n';
 
 export interface SelectLangProps {
-  className?: string;
+  className: string;
 }
 
 export default memo(({ className }: SelectLangProps) => {

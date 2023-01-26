@@ -13,7 +13,7 @@ function NotFound(){
         </Link>
       }
     />
-  )
-};
+  );
+}
 
 export default NotFound;

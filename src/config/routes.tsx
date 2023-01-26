@@ -1,22 +1,18 @@
-/**
- * 路由配置
- */
-
 import React, { memo, Suspense } from 'react';
 import { useLocation, useRoutes } from 'react-router-dom';
 import { createUseRoutes, pathKeyCreateUseRoutes } from '@/utils/router';
 
 import PageLoading from '@/components/PageLoading';
 
-// BlankLayout
 import BlankLayout from '@/layouts/BlankLayout';
 
-// SecurityLayout
+
+
 import SecurityLayout from '@/layouts/SecurityLayout';
 
-// UniversalLayout
-import UniversalLayoutRoutes from '@/layouts/UniversalLayout/routes';
 import UniversalLayout from '@/layouts/UniversalLayout';
+
+import UniversalLayoutRoutes from '@/layouts/UniversalLayout/routes';
 
 // UserLayout
 import UserLayoutRoutes from '@/layouts/UserLayout/routes';
@@ -53,7 +49,6 @@ export const SuspenseLazy = memo(
   )
 );
 
-// eslint-disable-next-line react/display-name
 export default memo(() => {
   const routesElement = useRoutes(routes);
   if (routesElement == null) {

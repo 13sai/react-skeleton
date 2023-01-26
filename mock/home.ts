@@ -1,11 +1,10 @@
 import mockjs from 'mockjs';
 import { MockMethod } from 'vite-plugin-mock';
-const ajaxHeadersTokenKey = 'token';
 export default [
   {
     url: '/api/home/articles/dailynew',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: {
@@ -21,7 +20,7 @@ export default [
   {
     url: '/api/home/works/weeknew',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: {
@@ -39,7 +38,7 @@ export default [
   {
     url: '/api/home/topics/monthnew',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: {
@@ -57,7 +56,7 @@ export default [
   {
     url: '/api/home/links/annualnew',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: {
@@ -75,7 +74,7 @@ export default [
   {
     url: '/api/home/searchs/keywords',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: mockjs.mock({
@@ -95,7 +94,7 @@ export default [
   {
     url: '/api/home/tags',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: mockjs.mock({
@@ -117,7 +116,7 @@ export default [
   {
     url: '/api/home/articles',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: mockjs.mock({
@@ -145,7 +144,7 @@ export default [
   {
     url: '/api/home/works',
     method: 'get',
-    response: ({ body }) => {
+    response: () => {
       return  {
         code: 0,
         data: mockjs.mock({
