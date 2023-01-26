@@ -1,8 +1,8 @@
 /**
- * 路由配置 入口
+ * 路由配置
  */
 
-import React, { lazy, memo, Suspense } from 'react';
+import React, { memo, Suspense } from 'react';
 import { useLocation, useRoutes } from 'react-router-dom';
 import { createUseRoutes, pathKeyCreateUseRoutes } from '@/utils/router';
 
@@ -21,6 +21,7 @@ import UniversalLayout from '@/layouts/UniversalLayout';
 // UserLayout
 import UserLayoutRoutes from '@/layouts/UserLayout/routes';
 import UserLayout from '@/layouts/UserLayout';
+import NotFound from '@/pages/404';
 
 /**
  * 配置所有路由
@@ -35,11 +36,7 @@ const routes = createUseRoutes([
     path: '/user',
     redirect: '/user/login',
     children: UserLayoutRoutes,
-  },
-  {
-    path: '*',
-    component: lazy(() => import('../pages/404')),
-  },
+  }
 ]);
 
 /**
@@ -58,9 +55,13 @@ export const SuspenseLazy = memo(
 
 export default memo(() => {
   const routesElement = useRoutes(routes);
+  if (routesElement == null) {
+    return (
+      <NotFound />
+    );
+  }
   const location = useLocation();
 
-  // 属于 UniversalLayout
   if (layoutToRoutes.UniversalLayout[location.pathname]) {
     return (
       <SecurityLayout>
@@ -71,7 +72,6 @@ export default memo(() => {
     );
   }
 
-  // 属于 UserLayout
   if (layoutToRoutes.UserLayout[location.pathname]) {
     return (
       <UserLayout>
