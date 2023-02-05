@@ -1,17 +1,11 @@
 import React, { memo, Suspense } from 'react';
 import { useLocation, useRoutes } from 'react-router-dom';
+
 import { createUseRoutes, pathKeyCreateUseRoutes } from '@/utils/router';
-
 import PageLoading from '@/components/PageLoading';
-
 import BlankLayout from '@/layouts/BlankLayout';
-
-
-
 import SecurityLayout from '@/layouts/SecurityLayout';
-
 import UniversalLayout from '@/layouts/UniversalLayout';
-
 import UniversalLayoutRoutes from '@/layouts/UniversalLayout/routes';
 
 // UserLayout

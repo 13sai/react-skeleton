@@ -16,14 +16,14 @@ import RightTopMessage from './RightTopMessage';
 
 import Settings from './Settings';
 
-import { IRouter, IPathKeyRouter, BreadcrumbType } from '@/types/router';
+import { IRouter, IPathKeyRouter, Breadcrumb } from '@/types/router';
 
 export interface RightTopProps {
   menuData: IRouter[];
   jsonMenuData: IPathKeyRouter;
   routeItem: IRouter;
   userRoles?: string[];
-  breadCrumbs?: BreadcrumbType[];
+  breadCrumbs?: Breadcrumb[];
 }
 
 export default memo(
@@ -68,9 +68,6 @@ export default memo(
                 />
               </div>
               <div className='universallayout-top-menu-right'>
-                <Suspense fallback={<>...</>}>
-                  <RightTopMessage />
-                </Suspense>
                 <RightTopUser />
                 <SelectLang className='universallayout-top-selectlang' />
                 <Settings />

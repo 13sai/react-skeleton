@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode development",
     "build": "tsc && vite build",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx ./src ./mock --fix",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less"
