@@ -13,7 +13,7 @@ import { formatRoutes } from '@/utils/router';
 
 import layoutRotes from './routes';
 
-import '@/assets/css/index.less';
+import './css/index.less';
 
 export interface UserLayoutProps {
   children: React.ReactNode;

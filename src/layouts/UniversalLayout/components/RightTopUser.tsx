@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Dropdown, MenuProps } from 'antd';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -19,7 +19,11 @@ export default memo(() => {
   const items: MenuProps['items'] = [
     {
       key: 'userinfo',
-      label: <>{t('universal-layout.topmenu.userinfo')}</>,
+      label: (
+        <Link to='/info'>
+          {t('universal-layout.topmenu.userinfo')}
+        </Link>
+      ),
     },
     {
       key: 'logout',

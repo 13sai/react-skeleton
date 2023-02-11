@@ -1,8 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
-import { BrowserRouter /* , HashRouter */ } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-// Register icon sprite
 import 'virtual:svg-icons-register';
 
 import 'antd/dist/reset.css';

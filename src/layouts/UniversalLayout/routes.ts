@@ -233,6 +233,15 @@ const universalLayoutRotes: IRouter[] = [
       },
     ],
   },
+  {
+    path: '/info',
+    meta: {
+      icon: 'user',
+      title: 'universal-layout.menu.info',
+      hidden: true,
+    },
+    component: lazy(() => import('@/pages/user/info')),
+  },
 ];
 
 export default universalLayoutRotes;
